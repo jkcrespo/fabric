@@ -8,7 +8,7 @@ entry point for any AI agent (Claude Code, Cursor, Copilot, custom agents). It h
 
 ## 1. Always-on rules (apply to every task)
 
-These cover foundations, because on-demand lookups (component metadata, later the MCP
+These cover foundations, because on-demand lookups (component metadata, the `fabric` MCP
 server) only return what a prompt asks for. If you skip these, you will guess spacing,
 color and type — and you will guess wrong.
 
@@ -73,6 +73,10 @@ Do not set font size, weight or family directly. Rules (`docs/foundations/typogr
 Anything brand-specific comes from `tokens/brands/<brand>.json` through semantic tokens.
 
 ## 2. Load on demand
+
+If the `fabric` MCP server is connected (`.mcp.json` in this repo, or
+`@jkcrespo/fabric-mcp`), prefer its tools: `find_component`, `get_component`,
+`list_tokens`, `get_token`, `get_guideline`. Otherwise read the files below.
 
 | You need… | Read |
 | --- | --- |

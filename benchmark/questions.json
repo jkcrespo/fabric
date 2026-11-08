@@ -1,0 +1,27 @@
+{
+  "$description": "Real questions an agent asks while building UI with Fabric. Each answer is graded by regex (case-insensitive). Add questions from real agent sessions over time.",
+  "questions": [
+    { "id": "gap-buttons", "q": "Which token sets the gap between buttons in a group?", "expect": ["between-buttons"] },
+    { "id": "content-to-buttons-px", "q": "How many pixels is the space between content and the buttons that act on it?", "expect": ["\\b24\\b"] },
+    { "id": "button-radius", "q": "Which radius token do buttons use?", "expect": ["radius\\.button"] },
+    { "id": "secondary-variant", "q": "Which Button variant should a secondary action next to the main solid button use?", "expect": ["outline"] },
+    { "id": "button-spinner", "q": "Which Button prop shows a spinner while an async action runs?", "expect": ["\\bloading\\b"] },
+    { "id": "textfield-error-prop", "q": "Which TextField prop holds the error message text?", "expect": ["\\berror\\b"] },
+    { "id": "textfield-label-required", "q": "Is the TextField label prop required? Answer yes or no.", "expect": ["\\byes\\b"] },
+    { "id": "form-level-error", "q": "Which component shows a form-level error after a failed submit?", "expect": ["\\balert\\b"] },
+    { "id": "confirm-destructive", "q": "Which component confirms a destructive, irreversible action?", "expect": ["\\bdialog\\b"] },
+    { "id": "dialog-default-size", "q": "What is the default size of a Dialog?", "expect": ["\\bsm\\b", "small"] },
+    { "id": "alert-severity-error", "q": "Which Alert severity value is used for errors?", "expect": ["\\bdanger\\b"] },
+    { "id": "alert-banner-variant", "q": "Which Alert variant is meant for a high-priority banner at the top of a page?", "expect": ["\\bsolid\\b"] },
+    { "id": "card-size-prop", "q": "Which Card prop sets its corner radius and padding together?", "expect": ["\\bsize\\b"] },
+    { "id": "card-lg-padding", "q": "Which spacing token pads a Card with size=\"lg\"?", "expect": ["container-padding"] },
+    { "id": "danger-mui", "q": "Which MUI theme palette key does color.danger.background map to?", "expect": ["palette\\.error\\.main", "error\\.main"] },
+    { "id": "label-gap-var", "q": "What is the CSS variable for the gap between a field label and its input?", "expect": ["--fabric-space-label-to-input"] },
+    { "id": "on-primary-text", "q": "Which token colors text placed on color.primary.background?", "expect": ["color\\.primary\\.foreground"] },
+    { "id": "date-instead", "q": "What should you use instead of a TextField to pick a date?", "expect": ["date picker", "datepicker"] },
+    { "id": "temporary-confirmation", "q": "What should you use for a temporary confirmation that disappears on its own?", "expect": ["snackbar"] },
+    { "id": "alert-success-role", "q": "Which ARIA role does Alert use for a success message?", "expect": ["\\bstatus\\b"] },
+    { "id": "card-default-variant", "q": "What is the default Card variant?", "expect": ["\\belevated\\b"] },
+    { "id": "title-typography", "q": "Which typography token is used for card and dialog titles?", "expect": ["heading-sm"] }
+  ]
+}

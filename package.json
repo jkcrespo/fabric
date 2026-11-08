@@ -14,14 +14,16 @@
     "build": "npm run build --workspaces",
     "create-brand": "node scripts/create-brand.mjs",
     "typecheck": "tsc -p tests/tsconfig.json && tsc -p packages/react/tsconfig.stories.json",
-    "test": "node --test tests/build.test.mjs tests/ramp.test.mjs",
+    "test": "node --test tests/build.test.mjs tests/ramp.test.mjs tests/mcp.test.mjs",
     "check": "npm run validate && npm run validate:components && npm run build && npm run typecheck && npm test && npm run test:browser && npm run build-storybook && npm run test:a11y",
     "test:browser": "node --test tests/browser.test.mjs",
     "validate:components": "node scripts/validate-components.mjs",
     "validate:components:json": "node scripts/validate-components.mjs --json",
     "storybook": "npm run build && npm run storybook -w @jkcrespo/fabric-react",
     "build-storybook": "npm run build-storybook -w @jkcrespo/fabric-react",
-    "test:a11y": "node --test tests/a11y.test.mjs"
+    "test:a11y": "node --test tests/a11y.test.mjs",
+    "benchmark": "node benchmark/run.mjs",
+    "benchmark:run": "node benchmark/run.mjs --run"
   },
   "repository": {
     "type": "git",
@@ -30,9 +32,11 @@
   "workspaces": [
     "packages/tokens",
     "packages/theme",
-    "packages/react"
+    "packages/react",
+    "packages/mcp"
   ],
   "devDependencies": {
+    "@anthropic-ai/sdk": "^1.3.0",
     "@storybook/react-vite": "^10.6.3",
     "@vitejs/plugin-react": "^6.1.2",
     "ajv": "^8.20.0",
