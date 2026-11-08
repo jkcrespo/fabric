@@ -72,7 +72,7 @@ for (const brand of Object.keys(allBrands)) {
           failures.push(`${story.id} [${v.id}] ${v.help}: ${v.nodes.map((n) => n.target.join(' ')).slice(0, 3).join(', ')}`);
         }
         for (const e of errors) failures.push(`${story.id} console error: ${e}`);
-        if (SHOTS && /variants|all-severities|form-section|destructive/.test(story.id)) {
+        if (SHOTS && /variants|all-severities|form-section|destructive|textfield--states/.test(story.id)) {
           await page.screenshot({ path: join(SHOTS, `${brand}-${mode}-${story.id}.png`) });
         }
         page.off('console', onError);

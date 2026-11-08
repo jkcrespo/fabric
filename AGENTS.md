@@ -62,7 +62,11 @@ Do not set font size, weight or family directly. Rules (`docs/foundations/typogr
    Follow its `usage.whenNot` and `composition` rules.
 6. If no Fabric component fits, use the MUI component directly — it is themed. Do not
    restyle it with colors or sizes; use its own props.
-7. Destructive actions: `Button color="danger"` + confirmation `Dialog`. Field errors go
+7. Form fields: the label sits above the input container, left-aligned, with
+   `space.label-to-input` (8px) between them. The theme does this for every MUI input;
+   helper and error text sit flush left, `space.100` below. Never re-enable floating
+   labels or use a placeholder as the label.
+8. Destructive actions: `Button color="danger"` + confirmation `Dialog`. Field errors go
    on `TextField error`, form-level errors in an `Alert severity="danger"`.
 
 **Theming** — Fabric is white-label. Never assume a brand's colors, fonts or corner radius.

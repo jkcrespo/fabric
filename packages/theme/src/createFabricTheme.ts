@@ -135,6 +135,40 @@ export function createFabricTheme(brand: FabricBrand, overrides: ThemeOptions = 
         MuiPaper: { styleOverrides: { root: { backgroundImage: 'none' }, rounded: { borderRadius: v.radius.cardMd } } },
         MuiCard: { styleOverrides: { root: { borderRadius: v.radius.cardMd } } },
         MuiDialog: { styleOverrides: { paper: { borderRadius: v.radius.cardLg } } },
+        // Labels sit above the input container, left-aligned, space.label-to-input apart —
+        // no floating label and no notch cut into the border.
+        MuiInputLabel: {
+          defaultProps: { shrink: true },
+          styleOverrides: {
+            root: {
+              position: 'static',
+              transform: 'none',
+              maxWidth: '100%',
+              whiteSpace: 'normal',
+              overflow: 'visible',
+              marginBottom: v.space.labelToInput,
+              ...v.typography.titleSm,
+              color: v.color.text.default,
+              '&.Mui-focused, &.Mui-error': { color: v.color.text.default },
+              '&.Mui-disabled': { color: v.color.text.disabled },
+              '& .MuiFormLabel-asterisk': { color: v.color.danger.text },
+            },
+          },
+        },
+        MuiFormLabel: {
+          styleOverrides: {
+            root: { ...v.typography.titleSm, color: v.color.text.default, '&.Mui-focused': { color: v.color.text.default } },
+          },
+        },
+        // Helper and error text align with the label, flush left under the field.
+        MuiFormHelperText: {
+          styleOverrides: { root: { marginLeft: 0, marginRight: 0, marginTop: v.space['100'] } },
+        },
+        MuiOutlinedInput: {
+          styleOverrides: {
+            notchedOutline: { top: 0, '& legend': { display: 'none' } },
+          },
+        },
         // One visible focus ring everywhere, in the brand's focus color.
         MuiButtonBase: {
           styleOverrides: {

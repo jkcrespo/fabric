@@ -32,6 +32,7 @@ Use **`space.300` (12px)** when you need a tighter relationship that is still cl
 | Between cards, near | `space.between-cards-near` | 12px (`space.300`) |
 | Between cards, far | `space.between-cards-far` | 24px (`space.600`) |
 | Between inputs | `space.between-inputs` | 16px (`space.400`) |
+| Label to input | `space.label-to-input` | 8px (`space.200`) |
 | Icon to text | `space.icon-to-text` | 8px (`space.200`) |
 | Icon to text, near | `space.icon-to-text-near` | 4px (`space.100`) |
 | Icon to text, far | `space.icon-to-text-far` | 12px (`space.300`) |

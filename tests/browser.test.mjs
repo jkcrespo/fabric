@@ -66,6 +66,25 @@ for (const brand of ['fabric', 'acme']) {
     assert.equal(await style('#h1', 'fontSize'), '48px');
     assert.ok((await style('#h1', 'fontFamily')).startsWith(t.typography.displayLg.fontFamily.split(',')[0]));
     assert.equal(await style('#btn', 'textTransform'), 'none');
+    // Labels sit above the input container, left-aligned, space.label-to-input apart.
+    for (const [label, box] of [['label[for="field"]', '.MuiOutlinedInput-root:has(#field)'], ['#select-label', '.MuiOutlinedInput-root:has(#select)']]) {
+      const g = await page.evaluate(([l, b]) => {
+        const lr = document.querySelector(l).getBoundingClientRect();
+        const br = document.querySelector(b).getBoundingClientRect();
+        const legend = document.querySelector(`${b} legend`);
+        return { gap: br.top - lr.bottom, left: lr.left - br.left, legend: legend ? getComputedStyle(legend).display : 'none' };
+      }, [label, box]);
+      assert.ok(Math.abs(g.gap - parseFloat(t.space.labelToInput)) < 0.5, `${label}: gap ${g.gap}px, want ${t.space.labelToInput}`);
+      assert.ok(Math.abs(g.left) < 0.5, `${label}: left offset ${g.left}px`);
+      assert.equal(g.legend, 'none', `${label}: no notch in the border`);
+    }
+    const helper = await page.evaluate(() => {
+      const h = document.querySelector('#field-helper-text').getBoundingClientRect();
+      const b = document.querySelector('.MuiOutlinedInput-root:has(#field)').getBoundingClientRect();
+      return { left: h.left - b.left, gap: h.top - b.bottom };
+    });
+    assert.ok(Math.abs(helper.left) < 0.5, `helper text left offset ${helper.left}px`);
+    assert.ok(Math.abs(helper.gap - parseFloat(t.space['100'])) < 0.5, `helper text gap ${helper.gap}px`);
     // Noto Sans actually loads (not just named in the font stack)
     await page.evaluate(() => document.fonts.ready);
     assert.ok((await style('#btn', 'fontFamily')).startsWith('"Noto Sans Variable"'));

@@ -41,6 +41,7 @@
     "between-cards-near": { "$value": "{space.300}", "$description": "Gap between cards in a dense grid." },
     "between-cards-far": { "$value": "{space.600}", "$description": "Gap between cards in a spacious layout." },
     "between-inputs": { "$value": "{space.400}", "$description": "Gap between form fields." },
+    "label-to-input": { "$value": "{space.200}", "$description": "Gap between a field label and its input container. Labels sit above the container, left-aligned." },
     "icon-to-text": { "$value": "{space.200}", "$description": "Gap between an icon and its label." },
     "icon-to-text-near": { "$value": "{space.100}", "$description": "Gap between an icon and its label in compact controls." },
     "icon-to-text-far": { "$value": "{space.300}", "$description": "Gap between an icon and its label in large controls." },

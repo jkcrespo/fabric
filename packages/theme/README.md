@@ -69,6 +69,7 @@ to avoid a flash of the wrong mode.
 | `radius.card-lg` | Dialog |
 | `elevation.raised / floating / overlay / modal` | `shadows[1–2] / [3–8] / [9–16] / [17–24]` |
 | `color.border.focus` | focus ring on every focusable MUI component |
+| `space.label-to-input`, `typography.title-sm` | Input labels: static, above the field, left-aligned (no floating label, no notched border) |
 
 Overrides: `createFabricTheme(brand, { components: { … } })` and pass it as
 `<FabricProvider theme={…}>`.

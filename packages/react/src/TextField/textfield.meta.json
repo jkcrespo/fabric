@@ -171,6 +171,7 @@
       }
     ],
     "composition": [
+      "The label always sits above the input container, left-aligned, space.label-to-input (8px) apart. Never use floating or placeholder-only labels.",
       "Stack fields vertically with space.between-inputs (16px) between them.",
       "Show errors after blur or submit, not while the user is still typing.",
       "Put the submit Button after the last field, aligned with the fields."
@@ -193,7 +194,9 @@
     "radius.input",
     "typography.body-md",
     "typography.caption",
-    "space.between-inputs"
+    "space.between-inputs",
+    "space.label-to-input",
+    "typography.title-sm"
   ],
   "accessibility": {
     "role": "textbox",

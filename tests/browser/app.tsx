@@ -2,7 +2,7 @@
 import '@fontsource-variable/noto-sans';
 import { createRoot } from 'react-dom/client';
 import { useEffect } from 'react';
-import { Alert, Button, Card, CardContent, Chip, Dialog, Stack, TextField, Typography } from '@mui/material';
+import { Alert, Button, Card, CardContent, Chip, Dialog, FormControl, InputLabel, MenuItem, Select, Stack, TextField, Typography } from '@mui/material';
 import fabric from '@jkcrespo/fabric-tokens/fabric';
 import acme from '@jkcrespo/fabric-tokens/acme';
 import { FabricProvider, FabricBrandScope, useColorScheme } from '@jkcrespo/fabric-theme';
@@ -36,6 +36,12 @@ function Demo() {
         <Chip label="Success" color="success" variant="outlined" />
       </Stack>
       <TextField label="Email" helperText="We never share it." id="field" />
+      <FormControl>
+        <InputLabel id="select-label">Country</InputLabel>
+        <Select labelId="select-label" id="select" label="Country" defaultValue="nl">
+          <MenuItem value="nl">Netherlands</MenuItem>
+        </Select>
+      </FormControl>
       <Alert severity="error" id="alert">Something went wrong.</Alert>
       <Card id="card" elevation={1}>
         <CardContent>
