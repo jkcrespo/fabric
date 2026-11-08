@@ -13,6 +13,7 @@ server) only return what a prompt asks for. If you skip these, you will guess sp
 color and type — and you will guess wrong.
 
 **Tokens**
+0. In CSS use `var(--fabric-…)`; in JS/TS import from `@jkcrespo/fabric-tokens/<brand>`.
 1. Use **semantic tokens only** in components and product code: `color.*`, `space.*`,
    `radius.*`, `typography.*`, `elevation.*`, `motion.*`.
 2. **Never** use `primitive.*` or `brand.*` tokens outside of `tokens/`. Never hard-code
@@ -39,10 +40,11 @@ Anything brand-specific comes from `tokens/brands/<brand>.json` through semantic
 
 | You need… | Read |
 | --- | --- |
-| A token and when to use it | `tokens/semantic/*.json` (`$description` on every token) |
+| A token and when to use it | `packages/tokens/dist/manifest.json` after `npm run build` (intent, CSS var, JS path, MUI mapping, values) · or `tokens/semantic/*.json` |
+| How to use tokens in CSS / JS | `packages/tokens/README.md` |
 | The rules for naming anything | `docs/foundations/naming.md` |
 | How layers, brands and modes fit together | `docs/foundations/tokens.md` |
-| What a brand must define | `tokens/brand-contract.json` |
+| What a brand must define | `tokens/brand-contract.json` · create one with `npm run create-brand` |
 | Required contrast pairs | `tokens/contrast-pairs.json` |
 | A component's API and usage | `schemas/component.schema.json` (contract) · `*.meta.json` (per component, from step 4) |
 | What you may do without a human | `docs/governance/trust-levels.md` |
@@ -51,12 +53,12 @@ Anything brand-specific comes from `tokens/brands/<brand>.json` through semantic
 ## 3. Before you propose any change
 
 ```bash
-npm run validate         # human report
-npm run validate:json    # machine-readable report for agents
+npm run validate         # tokens: naming, layers, refs, brand contract, modes, contrast
+npm run validate:json    # same, machine-readable
+npm run check            # validate + build + typecheck + tests (what CI runs)
 ```
 
-It must exit 0. It checks naming, layer rules, references, the brand contract,
-light/dark parity and WCAG contrast for every brand × mode.
+All must exit 0. Never edit files in `packages/*/dist/` — they are generated.
 
 ## 4. What you are allowed to do
 

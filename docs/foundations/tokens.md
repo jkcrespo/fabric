@@ -29,16 +29,41 @@ A brand is **one file** that fills the brand contract. Status colors (danger, wa
 success, info), neutrals, spacing and the type scale stay system-owned, so every brand
 gets the same accessibility guarantees for free. To add a brand:
 
-1. Copy `tokens/brands/fabric.json` → `tokens/brands/<brand-id>.json`.
-2. Replace the ramps, fonts and radius references.
-3. `npm run validate` — fix any contrast failures (usually: darken step 600).
+**From two seed colors (recommended):**
 
-*Step 2 adds a generator so a brand can supply one seed color instead of a full ramp.*
+```bash
+npm run create-brand -- my-brand --primary "#0f62fe" --secondary "#8a3ffc" \
+  --heading serif --radius-control sm
+npm run validate && npm run build
+```
+
+The generator (`scripts/lib/ramp.mjs`) builds each 10-step ramp in OKLCH, keeps the
+seed's hue, and adjusts lightness until the ramp passes every contrast rule. The seeds
+are saved in the brand file's `$extensions` so it can be regenerated.
+
+**By hand:** copy `tokens/brands/fabric.json`, replace the ramps, fonts and radius,
+then `npm run validate` and fix any contrast failures (usually: darken step 600).
 
 ## Modes
 
 Semantic color has `color.light.json` and `color.dark.json`. Both must define the same
 paths. Everything else is mode-independent. Themes = **brands × modes** (today 2 × 2).
+
+## Build outputs — `@jkcrespo/fabric-tokens`
+
+`npm run build` runs `packages/tokens/build.mjs`. Only semantic tokens are published.
+
+| File | What it is |
+| --- | --- |
+| `<brand>.css` | CSS variables on `:root`, dark values under `[data-fabric-mode="dark"]` |
+| `<brand>.scoped.css` | Same, scoped to `[data-fabric-brand="<brand>"]` for several brands on one page |
+| `<brand>.js` + `.d.ts` | `tokens.light` / `tokens.dark` (resolved values), `vars` (`var()` refs), `breakpoints` |
+| `index.js` + `.d.ts` | Brand list and shared types (`FabricTokens`, `FabricBrandId`…) |
+| `manifest.json` | Every token: intent, MUI mapping, CSS var, JS path, value per brand × mode. **The file agents read.** |
+
+Value transforms: font sizes px → rem, font families → CSS font stacks, shadows → CSS
+`box-shadow`, easing → `cubic-bezier()`. Typography tokens become one CSS variable per
+property (`--fabric-typography-body-md-font-size`).
 
 ## Mapping to MUI
 

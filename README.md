@@ -9,7 +9,7 @@ An open-source, **white-label**, **agent-ready** design system built on [MUI](ht
 - **MUI-based:** behavior and accessibility come from MUI; Fabric supplies tokens,
   theming and the agent layer.
 
-> Status: **Step 1 — Foundations.** See [`docs/ROADMAP.md`](docs/ROADMAP.md).
+> Status: **Step 2 — Token build** done. See [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
 ## Repository layout
 
@@ -21,10 +21,15 @@ tokens/
   semantic/                Intent-named tokens, light/dark color modes
   brand-contract.json      What every brand must define
   contrast-pairs.json      WCAG pairs checked for every brand × mode
+packages/
+  tokens/                  @jkcrespo/fabric-tokens — CSS vars, typed JS, agent manifest
 schemas/
   component.schema.json    Machine-readable contract for component metadata
 scripts/
   validate-tokens.mjs      Deterministic checks (CI + agents)
+  create-brand.mjs         New brand from two seed colors
+  lib/                     Shared token loader, color math, ramp generator
+tests/                     Build, ramp and type tests
 docs/
   foundations/             Naming, token architecture, MUI mapping
   governance/              Agent trust levels
@@ -34,17 +39,24 @@ docs/
 ## Quick start
 
 ```bash
-npm run validate        # check tokens: naming, layers, refs, brand contract, contrast
-npm run validate:json   # same, machine-readable
+npm install
+npm run check           # validate + build + typecheck + tests
+npm run build           # build packages/tokens/dist
+npm run validate:json   # token report for agents
 ```
 
 Requires Node 20+.
 
 ## Add a brand
 
-1. Copy `tokens/brands/fabric.json` to `tokens/brands/<your-brand>.json`.
-2. Replace the primary/secondary ramps, fonts and radius.
-3. Run `npm run validate` and fix any contrast failures.
+```bash
+npm run create-brand -- my-brand --primary "#0f62fe" --secondary "#8a3ffc" --heading serif
+npm run check
+```
+
+The generator builds full color ramps that already pass every contrast rule. Options:
+`--heading` / `--body` (`sans` `serif` `mono`), `--radius-control` / `--radius-container`
+(`none` `sm` `md` `lg` `xl`), `--description`.
 
 ## License
 
