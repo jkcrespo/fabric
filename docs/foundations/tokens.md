@@ -67,7 +67,7 @@ property (`--fabric-typography-body-md-font-size`).
 
 ## Mapping to MUI
 
-The MUI theme (step 3) is generated from semantic tokens. The mapping is stored on each
+The MUI theme (`@jkcrespo/fabric-theme`) is generated from semantic tokens; full table in `packages/theme/README.md`. The mapping is stored on each
 token as `$extensions["com.fabric"].mui`, so it is machine-readable. Summary:
 
 | Fabric semantic | MUI theme |

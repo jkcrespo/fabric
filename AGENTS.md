@@ -13,7 +13,9 @@ server) only return what a prompt asks for. If you skip these, you will guess sp
 color and type — and you will guess wrong.
 
 **Tokens**
-0. In CSS use `var(--fabric-…)`; in JS/TS import from `@jkcrespo/fabric-tokens/<brand>`.
+0. In React, wrap the app in `FabricProvider` and style MUI components through the theme:
+   `sx={{ p: 4, bgcolor: 'background.paper' }}`, `theme.fabric.color.surface.sunken`.
+   In plain CSS use `var(--fabric-…)`. Never pass hex values to `sx` or `style`.
 1. Use **semantic tokens only** in components and product code: `color.*`, `space.*`,
    `radius.*`, `typography.*`, `elevation.*`, `motion.*`.
 2. **Never** use `primitive.*` or `brand.*` tokens outside of `tokens/`. Never hard-code
@@ -42,6 +44,7 @@ Anything brand-specific comes from `tokens/brands/<brand>.json` through semantic
 | --- | --- |
 | A token and when to use it | `packages/tokens/dist/manifest.json` after `npm run build` (intent, CSS var, JS path, MUI mapping, values) · or `tokens/semantic/*.json` |
 | How to use tokens in CSS / JS | `packages/tokens/README.md` |
+| How Fabric maps onto MUI (palette, typography, shadows, radius) | `packages/theme/README.md` |
 | The rules for naming anything | `docs/foundations/naming.md` |
 | How layers, brands and modes fit together | `docs/foundations/tokens.md` |
 | What a brand must define | `tokens/brand-contract.json` · create one with `npm run create-brand` |

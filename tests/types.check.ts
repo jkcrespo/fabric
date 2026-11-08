@@ -15,3 +15,19 @@ tokens.light.primitive;
 const bad: FabricBrandId = 'not-a-brand';
 
 export { id, fill, weight, cssVar, bp, bad };
+
+// ---- @jkcrespo/fabric-theme
+import { createFabricTheme, FabricProvider, FabricBrandScope, type FabricMode } from '@jkcrespo/fabric-theme';
+import fabric from '@jkcrespo/fabric-tokens/fabric';
+import { createElement } from 'react';
+
+const theme = createFabricTheme(acme, { spacing: 4 });
+const sunken: string = theme.fabric.color.surface.sunken; // tokens MUI has no slot for
+const main: string = theme.palette.primary.main;
+const mode: FabricMode = 'system';
+const app = createElement(FabricProvider, { brand: acme, defaultMode: mode }, createElement(FabricBrandScope, { brand: fabric }));
+
+// @ts-expect-error brand is required
+createElement(FabricProvider, {});
+
+export { theme, sunken, main, app };

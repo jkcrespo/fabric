@@ -153,20 +153,23 @@ for (const brand of brandIds) {
   const header = `/* @jkcrespo/fabric-tokens v${PKG.version} · brand: ${brand} · generated — do not edit */\n`;
   const css = (sel, darkSel) =>
     `${header}${sel} {\n  color-scheme: light;\n${cssBlocks.light}\n}\n\n${darkSel} {\n  color-scheme: dark;\n${cssBlocks.dark}\n}\n`;
-  writeFileSync(join(OUT, `${brand}.css`), css(':root,\n[data-fabric-mode="light"]', '[data-fabric-mode="dark"]'));
-  writeFileSync(
-    join(OUT, `${brand}.scoped.css`),
-    css(`[data-fabric-brand="${brand}"],\n[data-fabric-brand="${brand}"] [data-fabric-mode="light"]`, `[data-fabric-brand="${brand}"][data-fabric-mode="dark"],\n[data-fabric-brand="${brand}"] [data-fabric-mode="dark"]`)
+  const rootCss = css(':root,\n[data-fabric-mode="light"]', '[data-fabric-mode="dark"]');
+  // Scoped: the brand container, plus dark mode set on the container itself or on any ancestor/descendant.
+  const scopedCss = css(
+    `[data-fabric-brand="${brand}"],\n[data-fabric-brand="${brand}"] [data-fabric-mode="light"]`,
+    `[data-fabric-mode="dark"] [data-fabric-brand="${brand}"],\n[data-fabric-brand="${brand}"][data-fabric-mode="dark"],\n[data-fabric-brand="${brand}"] [data-fabric-mode="dark"]`
   );
+  writeFileSync(join(OUT, `${brand}.css`), rootCss);
+  writeFileSync(join(OUT, `${brand}.scoped.css`), scopedCss);
 
   const meta = layers.brandMeta[brand];
   writeFileSync(
     join(OUT, `${brand}.js`),
-    `${header}export const brand = ${JSON.stringify(brand)};\nexport const description = ${JSON.stringify(meta.$description ?? '')};\nexport const breakpoints = ${JSON.stringify(breakpoints)};\nexport const tokens = ${JSON.stringify(trees, null, 2)};\nexport const vars = ${JSON.stringify(vars, null, 2)};\nexport default { brand, description, breakpoints, tokens, vars };\n`
+    `${header}export const brand = ${JSON.stringify(brand)};\nexport const description = ${JSON.stringify(meta.$description ?? '')};\nexport const breakpoints = ${JSON.stringify(breakpoints)};\nexport const tokens = ${JSON.stringify(trees, null, 2)};\nexport const vars = ${JSON.stringify(vars, null, 2)};\n/** Same CSS as ${brand}.css / ${brand}.scoped.css, for CSS-in-JS injection. */\nexport const css = ${JSON.stringify(rootCss)};\nexport const scopedCss = ${JSON.stringify(scopedCss)};\nexport default { brand, description, breakpoints, tokens, vars, css, scopedCss };\n`
   );
   writeFileSync(
     join(OUT, `${brand}.d.ts`),
-    `import type { FabricBrand } from './index.js';\ndeclare const theme: FabricBrand;\nexport declare const brand: FabricBrand['brand'];\nexport declare const description: string;\nexport declare const breakpoints: FabricBrand['breakpoints'];\nexport declare const tokens: FabricBrand['tokens'];\nexport declare const vars: FabricBrand['vars'];\nexport default theme;\n`
+    `import type { FabricBrand } from './index.js';\ndeclare const theme: FabricBrand;\nexport declare const brand: FabricBrand['brand'];\nexport declare const description: string;\nexport declare const breakpoints: FabricBrand['breakpoints'];\nexport declare const tokens: FabricBrand['tokens'];\nexport declare const vars: FabricBrand['vars'];\nexport declare const css: string;\nexport declare const scopedCss: string;\nexport default theme;\n`
   );
 }
 
@@ -181,7 +184,7 @@ writeFileSync(
   `/** Semantic token values for one mode. Keys are camelCase versions of the token path. */\nexport interface FabricTokens ${typeOf(sampleTree, '')}\n\n` +
     `/** Same shape as FabricTokens, but every leaf is a CSS var() reference. */\nexport interface FabricVars ${typeOf(varsType(sampleTree), '')}\n\n` +
     `export type FabricBrandId = ${brandIds.map((b) => JSON.stringify(b)).join(' | ')};\nexport type FabricMode = ${MODES.map((m) => JSON.stringify(m)).join(' | ')};\n\n` +
-    `export interface FabricBrand {\n  readonly brand: FabricBrandId;\n  readonly description: string;\n  readonly breakpoints: { readonly [K in ${Object.keys(breakpoints).map((k) => JSON.stringify(k)).join(' | ')}]: number };\n  readonly tokens: { readonly [M in FabricMode]: FabricTokens };\n  readonly vars: FabricVars;\n}\n\n` +
+    `export interface FabricBrand {\n  readonly brand: FabricBrandId;\n  readonly description: string;\n  readonly breakpoints: { readonly [K in ${Object.keys(breakpoints).map((k) => JSON.stringify(k)).join(' | ')}]: number };\n  readonly tokens: { readonly [M in FabricMode]: FabricTokens };\n  readonly vars: FabricVars;\n  /** CSS variables on :root (+ dark mode), for CSS-in-JS injection. */\n  readonly css: string;\n  /** Same, scoped to [data-fabric-brand=\"<brand>\"]. */\n  readonly scopedCss: string;\n}\n\n` +
     `export declare const brands: readonly FabricBrandId[];\nexport declare const modes: readonly FabricMode[];\nexport declare const cssVarPrefix: string;\n`
 );
 writeFileSync(

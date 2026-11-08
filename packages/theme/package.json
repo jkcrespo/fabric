@@ -1,0 +1,28 @@
+{
+  "name": "@jkcrespo/fabric-theme",
+  "version": "0.1.0",
+  "description": "MUI theme for Fabric: any brand becomes a CSS-variables MUI theme with light and dark modes.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@jkcrespo/fabric-tokens": "0.1.0"
+  },
+  "peerDependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^9.0.0",
+    "react": "^18.0.0 || ^19.0.0"
+  },
+  "repository": { "type": "git", "url": "https://github.com/jkcrespo/fabric.git", "directory": "packages/theme" },
+  "publishConfig": { "access": "public" }
+}
