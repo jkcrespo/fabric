@@ -9,7 +9,7 @@ An open-source, **white-label**, **agent-ready** design system built on [MUI](ht
 - **MUI-based:** behavior and accessibility come from MUI; Fabric supplies tokens,
   theming and the agent layer.
 
-> Status: **Step 3 — MUI theme** done. See [`docs/ROADMAP.md`](docs/ROADMAP.md).
+> Status: **Step 4 — First components** done. See [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
 ## Repository layout
 
@@ -24,13 +24,15 @@ tokens/
 packages/
   tokens/                  @jkcrespo/fabric-tokens — CSS vars, typed JS, agent manifest
   theme/                   @jkcrespo/fabric-theme — MUI theme + FabricProvider
+  react/                   @jkcrespo/fabric-react — components, metadata, Storybook
 schemas/
   component.schema.json    Machine-readable contract for component metadata
 scripts/
-  validate-tokens.mjs      Deterministic checks (CI + agents)
+  validate-tokens.mjs      Deterministic token checks (CI + agents)
+  validate-components.mjs  Component metadata vs schema and TypeScript props
   create-brand.mjs         New brand from two seed colors
   lib/                     Shared token loader, color math, ramp generator
-tests/                     Build, ramp, type and browser (Playwright) tests
+tests/                     Build, ramp, type, browser (Playwright) and accessibility (axe) tests
 docs/
   foundations/             Naming, token architecture, MUI mapping
   governance/              Agent trust levels
@@ -41,7 +43,8 @@ docs/
 
 ```bash
 npm install
-npm run check           # validate + build + typecheck + tests + browser tests
+npm run check           # everything CI runs: validation, build, types, unit, browser and a11y tests
+npm run storybook       # browse components with brand + mode switcher
 npm run build           # build packages/tokens/dist
 npm run validate:json   # token report for agents
 ```
@@ -52,12 +55,15 @@ Requires Node 20+.
 
 ```tsx
 import acme from '@jkcrespo/fabric-tokens/acme';
-import { FabricProvider } from '@jkcrespo/fabric-theme';
+import { FabricProvider, Button, Card } from '@jkcrespo/fabric-react';
 
-<FabricProvider brand={acme}>{/* any MUI components */}</FabricProvider>
+<FabricProvider brand={acme}>
+  <Card title="Welcome" actions={<Button>Get started</Button>} />
+</FabricProvider>
 ```
 
-See [`packages/theme/README.md`](packages/theme/README.md).
+See [`packages/react/README.md`](packages/react/README.md) and
+[`packages/theme/README.md`](packages/theme/README.md).
 
 ## Add a brand
 

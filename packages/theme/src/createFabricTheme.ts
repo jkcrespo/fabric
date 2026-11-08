@@ -127,7 +127,8 @@ export function createFabricTheme(brand: FabricBrand, overrides: ThemeOptions = 
       },
       components: {
         // Containers use the container radius; controls use theme.shape (control radius).
-        MuiPaper: { styleOverrides: { rounded: { borderRadius: v.radius.container } } },
+        // Dark surfaces come from color.surface.* tokens, so drop MUI's elevation overlay.
+        MuiPaper: { styleOverrides: { root: { backgroundImage: 'none' }, rounded: { borderRadius: v.radius.container } } },
         MuiCard: { styleOverrides: { root: { borderRadius: v.radius.container } } },
         MuiDialog: { styleOverrides: { paper: { borderRadius: v.radius.container } } },
         // One visible focus ring everywhere, in the brand's focus color.
@@ -138,19 +139,20 @@ export function createFabricTheme(brand: FabricBrand, overrides: ThemeOptions = 
             },
           },
         },
-        // Standard alerts use the role's subtle background + role text exactly as the
-        // tokens define them (contrast-checked), instead of MUI's derived shades.
+        // Alerts use the role tokens exactly as defined (contrast-checked), instead of
+        // MUI's derived shades.
         MuiAlert: {
           styleOverrides: {
             root: {
-              variants: Object.entries(ROLES).map(([severity, role]) => ({
-                props: { variant: 'standard', severity: severity as 'error' },
-                style: {
-                  backgroundColor: v.color[role].subtle,
-                  color: v.color[role].text,
-                  '& .MuiAlert-icon': { color: v.color[role].text },
-                },
-              })),
+              variants: Object.entries(ROLES).flatMap(([severity, role]) => {
+                const c = v.color[role];
+                const s = severity as 'error';
+                return [
+                  { props: { variant: 'standard', severity: s }, style: { backgroundColor: c.subtle, color: c.text, '& .MuiAlert-icon': { color: c.text } } },
+                  { props: { variant: 'filled', severity: s }, style: { backgroundColor: c.background, color: c.foreground, '& .MuiAlert-icon': { color: c.foreground } } },
+                  { props: { variant: 'outlined', severity: s }, style: { borderColor: c.text, color: c.text, '& .MuiAlert-icon': { color: c.text } } },
+                ];
+              }),
             },
           },
         },

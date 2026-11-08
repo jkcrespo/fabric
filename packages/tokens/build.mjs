@@ -175,6 +175,14 @@ for (const brand of brandIds) {
 
 // ------------------------------------------------------------ shared files
 writeFileSync(
+  join(OUT, 'all.js'),
+  brandIds.map((b) => `import ${camel(b)} from './${b}.js';`).join('\n') + `\n/** Every brand, keyed by id. Imports all brands — use \`./<brand>\` when you need only one. */\nexport const allBrands = { ${brandIds.map((b) => `${JSON.stringify(b)}: ${camel(b)}`).join(', ')} };\nexport default allBrands;\n`
+);
+writeFileSync(
+  join(OUT, 'all.d.ts'),
+  `import type { FabricBrand, FabricBrandId } from './index.js';\nexport declare const allBrands: { readonly [K in FabricBrandId]: FabricBrand };\nexport default allBrands;\n`
+);
+writeFileSync(
   join(OUT, 'index.js'),
   `export const brands = ${JSON.stringify(brandIds)};\nexport const modes = ${JSON.stringify(MODES)};\nexport const cssVarPrefix = ${JSON.stringify(PREFIX)};\n`
 );

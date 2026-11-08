@@ -35,6 +35,16 @@ Neutrals live in `color.surface.*`, `color.text.*`, `color.border.*`.
 **Typography** — use the semantic styles (`typography.body-md`, `typography.heading-sm`…).
 Do not set font size, weight or family directly.
 
+**Components**
+5. Use a Fabric component when one fits (`Button`, `TextField`, `Card`, `Alert`,
+   `Dialog` from `@jkcrespo/fabric-react`). Read its contract first:
+   `packages/react/src/<Name>/<name>.meta.json` (or the bundled `components.json`).
+   Follow its `usage.whenNot` and `composition` rules.
+6. If no Fabric component fits, use the MUI component directly — it is themed. Do not
+   restyle it with colors or sizes; use its own props.
+7. Destructive actions: `Button color="danger"` + confirmation `Dialog`. Field errors go
+   on `TextField error`, form-level errors in an `Alert severity="danger"`.
+
 **Theming** — Fabric is white-label. Never assume a brand's colors, fonts or corner radius.
 Anything brand-specific comes from `tokens/brands/<brand>.json` through semantic tokens.
 
@@ -49,7 +59,8 @@ Anything brand-specific comes from `tokens/brands/<brand>.json` through semantic
 | How layers, brands and modes fit together | `docs/foundations/tokens.md` |
 | What a brand must define | `tokens/brand-contract.json` · create one with `npm run create-brand` |
 | Required contrast pairs | `tokens/contrast-pairs.json` |
-| A component's API and usage | `schemas/component.schema.json` (contract) · `*.meta.json` (per component, from step 4) |
+| A component's API and usage | `packages/react/src/<Name>/<name>.meta.json` · all at once: `packages/react/dist/components.json` |
+| How to add a component | `packages/react/README.md` |
 | What you may do without a human | `docs/governance/trust-levels.md` |
 | Where the project is going | `docs/ROADMAP.md` |
 
@@ -58,7 +69,8 @@ Anything brand-specific comes from `tokens/brands/<brand>.json` through semantic
 ```bash
 npm run validate         # tokens: naming, layers, refs, brand contract, modes, contrast
 npm run validate:json    # same, machine-readable
-npm run check            # validate + build + typecheck + tests (what CI runs)
+npm run validate:components   # component metadata matches schema and TypeScript props
+npm run check            # everything CI runs, incl. browser and axe accessibility tests
 ```
 
 All must exit 0. Never edit files in `packages/*/dist/` — they are generated.

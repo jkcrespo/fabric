@@ -1,7 +1,7 @@
 // Test fixture: a page of real MUI components themed by Fabric.
 import { createRoot } from 'react-dom/client';
 import { useEffect } from 'react';
-import { Alert, Button, Card, CardContent, Chip, Stack, TextField, Typography } from '@mui/material';
+import { Alert, Button, Card, CardContent, Chip, Dialog, Stack, TextField, Typography } from '@mui/material';
 import fabric from '@jkcrespo/fabric-tokens/fabric';
 import acme from '@jkcrespo/fabric-tokens/acme';
 import { FabricProvider, FabricBrandScope, useColorScheme } from '@jkcrespo/fabric-theme';
@@ -42,6 +42,7 @@ function Demo() {
           <Typography variant="body2" color="text.secondary">Card body on color.surface.raised.</Typography>
         </CardContent>
       </Card>
+      <Dialog open title="Dialog" id="dialog" disablePortal hideBackdrop sx={{ position: 'static' }} slotProps={{ paper: { id: 'dialog-paper', elevation: 24 } }} />
       <FabricBrandScope brand={brand === acme ? fabric : acme}>
         <Button variant="contained" id="scoped-btn">Other brand</Button>
       </FabricBrandScope>

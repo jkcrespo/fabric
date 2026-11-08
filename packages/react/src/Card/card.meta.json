@@ -1,0 +1,64 @@
+{
+  "$schema": "../../../../schemas/component.schema.json",
+  "name": "Card",
+  "status": "beta",
+  "category": "layout",
+  "muiBase": "@mui/material/Card",
+  "intent": "Groups related content and actions about one subject on a raised surface: a summary, a settings section, an item in a grid. Has an optional title, body content and right-aligned actions. Combine several Cards in a grid, or put a form of TextFields inside one.",
+  "props": [
+    { "name": "title", "type": "ReactNode", "description": "Card heading." },
+    { "name": "subtitle", "type": "ReactNode", "description": "One line of supporting text under the title." },
+    { "name": "headingLevel", "type": "2 | 3 | 4 | 5 | 6", "values": [2, 3, 4, 5, 6], "default": 3, "description": "HTML heading level of the title, to keep the page outline correct." },
+    { "name": "actions", "type": "ReactNode", "description": "Buttons at the bottom, right-aligned. Primary action last." },
+    { "name": "variant", "type": "'elevated' | 'outlined'", "values": ["elevated", "outlined"], "default": "elevated", "description": "elevated on page backgrounds, outlined inside other surfaces or in dense grids." },
+    { "name": "padding", "type": "'sm' | 'md' | 'lg'", "values": ["sm", "md", "lg"], "default": "md", "description": "Inner spacing from the space tokens." },
+    { "name": "children", "type": "ReactNode", "description": "Body content." },
+    { "name": "aria-label", "type": "string", "description": "Accessible name when there is no title." },
+    { "name": "sx", "type": "SxProps<Theme>", "description": "Layout-only overrides." }
+  ],
+  "variants": [
+    { "name": "elevated", "intent": "Default. Separates the card from the page with a shadow." },
+    { "name": "outlined", "intent": "Inside another surface or in dense grids where shadows add noise." }
+  ],
+  "sizes": [
+    { "name": "sm", "intent": "Compact cards in dense grids." },
+    { "name": "md", "intent": "Default." },
+    { "name": "lg", "intent": "Feature cards and empty states." }
+  ],
+  "states": ["default"],
+  "usage": {
+    "when": [
+      "Showing a self-contained summary of one thing (a project, a plan, an order).",
+      "Splitting a long settings page into titled sections.",
+      "Laying out several comparable items in a grid."
+    ],
+    "whenNot": [
+      { "situation": "Wrapping the whole page or a single line of text", "useInstead": "Plain layout with space tokens" },
+      { "situation": "A status message", "useInstead": "Alert" },
+      { "situation": "Content that needs the user's full attention", "useInstead": "Dialog" }
+    ],
+    "composition": [
+      "Do not nest elevated Cards; use variant=\"outlined\" for an inner card.",
+      "Keep actions to one primary Button plus at most two secondary ones.",
+      "Cards in a grid use the same padding and variant."
+    ],
+    "related": ["Button", "TextField", "Alert"]
+  },
+  "tokens": [
+    "color.surface.raised", "color.border.default", "color.text.default", "color.text.subtle",
+    "radius.container", "elevation.raised", "space.sm", "space.md", "space.lg", "space.xs", "space.2xs",
+    "typography.heading-sm", "typography.body-sm"
+  ],
+  "accessibility": {
+    "role": "none (a generic container); the title is a real heading",
+    "keyboard": ["Not focusable itself; its buttons and inputs are"],
+    "notes": [
+      "Set headingLevel so headings stay in order on the page.",
+      "Do not make the whole card clickable and also put buttons inside it."
+    ]
+  },
+  "examples": [
+    { "title": "Summary with actions", "code": "<Card title=\"Pro plan\" subtitle=\"Billed yearly\" actions={<Button>Upgrade</Button>}>\n  <Typography>Unlimited projects and priority support.</Typography>\n</Card>" },
+    { "title": "Form section", "code": "<Card title=\"Profile\" actions={<Button type=\"submit\">Save</Button>}>\n  <TextField label=\"Name\" />\n</Card>" }
+  ]
+}

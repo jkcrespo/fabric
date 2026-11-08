@@ -86,6 +86,8 @@ for (const brand of ['fabric', 'acme']) {
     assert.equal(await style('#btn', 'color'), rgb(t.color.primary.foreground));
     assert.equal(await style('body', 'backgroundColor'), rgb(t.color.surface.default));
     assert.equal(await style('#card', 'backgroundColor'), rgb(t.color.surface.raised));
+    assert.equal(await style('#dialog-paper', 'backgroundColor'), rgb(t.color.surface.raised));
+    assert.equal(await style('#dialog-paper', 'backgroundImage'), 'none');
     assert.equal(await style('#alert', 'backgroundColor'), rgb(t.color.danger.subtle));
     assert.equal(await style('#alert', 'color'), rgb(t.color.danger.text));
     assert.equal(await style('#scoped-btn', 'backgroundColor'), rgb(tokens[other].dark.color.primary.background));

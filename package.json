@@ -13,10 +13,15 @@
     "validate:json": "node scripts/validate-tokens.mjs --json",
     "build": "npm run build --workspaces",
     "create-brand": "node scripts/create-brand.mjs",
-    "typecheck": "tsc -p tests/tsconfig.json",
+    "typecheck": "tsc -p tests/tsconfig.json && tsc -p packages/react/tsconfig.stories.json",
     "test": "node --test tests/build.test.mjs tests/ramp.test.mjs",
-    "check": "npm run validate && npm run build && npm run typecheck && npm test && npm run test:browser",
-    "test:browser": "node --test tests/browser.test.mjs"
+    "check": "npm run validate && npm run validate:components && npm run build && npm run typecheck && npm test && npm run test:browser && npm run build-storybook && npm run test:a11y",
+    "test:browser": "node --test tests/browser.test.mjs",
+    "validate:components": "node scripts/validate-components.mjs",
+    "validate:components:json": "node scripts/validate-components.mjs --json",
+    "storybook": "npm run build && npm run storybook -w @jkcrespo/fabric-react",
+    "build-storybook": "npm run build-storybook -w @jkcrespo/fabric-react",
+    "test:a11y": "node --test tests/a11y.test.mjs"
   },
   "repository": {
     "type": "git",
@@ -24,11 +29,18 @@
   },
   "workspaces": [
     "packages/tokens",
-    "packages/theme"
+    "packages/theme",
+    "packages/react"
   ],
   "devDependencies": {
+    "@storybook/react-vite": "^10.6.3",
+    "@vitejs/plugin-react": "^6.1.2",
+    "ajv": "^8.20.0",
+    "axe-core": "^4.14.0",
     "esbuild": "^0.28.2",
     "playwright": "^1.63.0",
-    "typescript": "^5.9.3"
+    "storybook": "^10.6.3",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.5"
   }
 }

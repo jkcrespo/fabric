@@ -39,28 +39,28 @@
       "background-hover": {"$value": "{primitive.color.red.200}", "$description": "Hover/pressed fill for danger elements.", "$extensions": {"com.fabric": {"mui": "palette.error.dark"}}},
       "foreground": {"$value": "{primitive.color.neutral.900}", "$description": "Text and icons placed on color.danger.background.", "$extensions": {"com.fabric": {"mui": "palette.error.contrastText"}}},
       "text": {"$value": "{primitive.color.red.300}", "$description": "danger colored text or icon on a neutral surface (links, status labels)."},
-      "subtle": {"$value": "{primitive.color.red.900}", "$description": "Tinted low-emphasis danger background (alerts, selected rows, soft chips).", "$extensions": {"com.fabric": {"mui": "palette.error.light"}}}
+      "subtle": {"$value": "{primitive.color.red.950}", "$description": "Tinted low-emphasis danger background (alerts, selected rows, soft chips).", "$extensions": {"com.fabric": {"mui": "palette.error.light"}}}
     },
     "warning": {
       "background": {"$value": "{primitive.color.amber.300}", "$description": "Solid fill for warning elements. Caution: something needs attention but is not broken.", "$extensions": {"com.fabric": {"mui": "palette.warning.main"}}},
       "background-hover": {"$value": "{primitive.color.amber.200}", "$description": "Hover/pressed fill for warning elements.", "$extensions": {"com.fabric": {"mui": "palette.warning.dark"}}},
       "foreground": {"$value": "{primitive.color.neutral.900}", "$description": "Text and icons placed on color.warning.background.", "$extensions": {"com.fabric": {"mui": "palette.warning.contrastText"}}},
       "text": {"$value": "{primitive.color.amber.300}", "$description": "warning colored text or icon on a neutral surface (links, status labels)."},
-      "subtle": {"$value": "{primitive.color.amber.900}", "$description": "Tinted low-emphasis warning background (alerts, selected rows, soft chips).", "$extensions": {"com.fabric": {"mui": "palette.warning.light"}}}
+      "subtle": {"$value": "{primitive.color.amber.950}", "$description": "Tinted low-emphasis warning background (alerts, selected rows, soft chips).", "$extensions": {"com.fabric": {"mui": "palette.warning.light"}}}
     },
     "success": {
       "background": {"$value": "{primitive.color.green.300}", "$description": "Solid fill for success elements. Positive confirmation and completed states.", "$extensions": {"com.fabric": {"mui": "palette.success.main"}}},
       "background-hover": {"$value": "{primitive.color.green.200}", "$description": "Hover/pressed fill for success elements.", "$extensions": {"com.fabric": {"mui": "palette.success.dark"}}},
       "foreground": {"$value": "{primitive.color.neutral.900}", "$description": "Text and icons placed on color.success.background.", "$extensions": {"com.fabric": {"mui": "palette.success.contrastText"}}},
       "text": {"$value": "{primitive.color.green.300}", "$description": "success colored text or icon on a neutral surface (links, status labels)."},
-      "subtle": {"$value": "{primitive.color.green.900}", "$description": "Tinted low-emphasis success background (alerts, selected rows, soft chips).", "$extensions": {"com.fabric": {"mui": "palette.success.light"}}}
+      "subtle": {"$value": "{primitive.color.green.950}", "$description": "Tinted low-emphasis success background (alerts, selected rows, soft chips).", "$extensions": {"com.fabric": {"mui": "palette.success.light"}}}
     },
     "info": {
       "background": {"$value": "{primitive.color.blue.300}", "$description": "Solid fill for info elements. Neutral, informative messages.", "$extensions": {"com.fabric": {"mui": "palette.info.main"}}},
       "background-hover": {"$value": "{primitive.color.blue.200}", "$description": "Hover/pressed fill for info elements.", "$extensions": {"com.fabric": {"mui": "palette.info.dark"}}},
       "foreground": {"$value": "{primitive.color.neutral.900}", "$description": "Text and icons placed on color.info.background.", "$extensions": {"com.fabric": {"mui": "palette.info.contrastText"}}},
       "text": {"$value": "{primitive.color.blue.300}", "$description": "info colored text or icon on a neutral surface (links, status labels)."},
-      "subtle": {"$value": "{primitive.color.blue.900}", "$description": "Tinted low-emphasis info background (alerts, selected rows, soft chips).", "$extensions": {"com.fabric": {"mui": "palette.info.light"}}}
+      "subtle": {"$value": "{primitive.color.blue.950}", "$description": "Tinted low-emphasis info background (alerts, selected rows, soft chips).", "$extensions": {"com.fabric": {"mui": "palette.info.light"}}}
     }
   }
 }

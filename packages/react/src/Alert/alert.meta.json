@@ -1,0 +1,62 @@
+{
+  "$schema": "../../../../schemas/component.schema.json",
+  "name": "Alert",
+  "status": "beta",
+  "category": "feedback",
+  "muiBase": "@mui/material/Alert",
+  "intent": "Tells the user about the status of the page or of something they just did: an error to fix, a warning, a success confirmation or neutral information. Stays in the page flow (not a popup). Place it above the content it is about, e.g. at the top of a form or Card.",
+  "props": [
+    { "name": "severity", "type": "'info' | 'success' | 'warning' | 'danger'", "values": ["info", "success", "warning", "danger"], "default": "info", "description": "Meaning of the message. Sets color, icon and screen-reader urgency." },
+    { "name": "variant", "type": "'subtle' | 'solid' | 'outline'", "values": ["subtle", "solid", "outline"], "default": "subtle", "description": "subtle for inline messages, solid for page-level banners, outline for low emphasis in dense UI." },
+    { "name": "title", "type": "ReactNode", "description": "Short bold summary above the message." },
+    { "name": "children", "type": "ReactNode", "description": "The message: what happened and what to do next." },
+    { "name": "onClose", "type": "() => void", "description": "Shows a close button. Omit for messages that must stay." },
+    { "name": "action", "type": "ReactNode", "description": "One action, e.g. <Button variant=\"ghost\" size=\"sm\">Retry</Button>." },
+    { "name": "icon", "type": "ReactNode | false", "description": "Replace the severity icon, or false to hide it." },
+    { "name": "sx", "type": "SxProps<Theme>", "description": "Layout-only overrides." }
+  ],
+  "variants": [
+    { "name": "subtle", "intent": "Default inline message inside a page, form or card." },
+    { "name": "solid", "intent": "High-priority banner at the top of a page." },
+    { "name": "outline", "intent": "Low-emphasis note inside dense UI." }
+  ],
+  "states": ["default"],
+  "usage": {
+    "when": [
+      "A form failed to submit: severity=\"danger\" at the top of the form, summarising what to fix.",
+      "Confirming that something saved or sent: severity=\"success\".",
+      "Warning about a consequence before the user acts: severity=\"warning\"."
+    ],
+    "whenNot": [
+      { "situation": "An error on one specific field", "useInstead": "TextField error" },
+      { "situation": "A decision the user must make before continuing", "useInstead": "Dialog" },
+      { "situation": "Temporary confirmation that disappears on its own", "useInstead": "MUI Snackbar" }
+    ],
+    "composition": [
+      "One Alert per message; do not stack more than two.",
+      "Put the Alert directly above the content it refers to.",
+      "Write the message as: what happened, then what to do."
+    ],
+    "related": ["TextField", "Card", "Dialog", "Button"]
+  },
+  "tokens": [
+    "color.info.subtle", "color.info.text", "color.info.background", "color.info.foreground",
+    "color.success.subtle", "color.success.text", "color.success.background", "color.success.foreground",
+    "color.warning.subtle", "color.warning.text", "color.warning.background", "color.warning.foreground",
+    "color.danger.subtle", "color.danger.text", "color.danger.background", "color.danger.foreground",
+    "radius.container", "typography.body-sm"
+  ],
+  "accessibility": {
+    "role": "alert for danger and warning (announced immediately); status for info and success (announced politely)",
+    "keyboard": ["The close button and action are reachable with Tab"],
+    "notes": [
+      "Color is never the only signal: each severity has its own icon.",
+      "Only render an Alert with role=alert when the problem actually happens, not on page load."
+    ]
+  },
+  "examples": [
+    { "title": "Form error", "code": "<Alert severity=\"danger\" title=\"We couldn't save your changes\">Check the highlighted fields and try again.</Alert>" },
+    { "title": "Success", "code": "<Alert severity=\"success\" onClose={dismiss}>Invitation sent.</Alert>" },
+    { "title": "With action", "code": "<Alert severity=\"warning\" action={<Button variant=\"ghost\" size=\"sm\">Renew</Button>}>Your plan ends in 3 days.</Alert>" }
+  ]
+}

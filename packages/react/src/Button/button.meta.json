@@ -1,0 +1,69 @@
+{
+  "$schema": "../../../../schemas/component.schema.json",
+  "name": "Button",
+  "status": "beta",
+  "category": "action",
+  "muiBase": "@mui/material/Button",
+  "intent": "Triggers an action in the current view: submit a form, confirm a dialog, start a task. Combine with Card actions, Dialog actions and form layouts. For navigation to another page pass href so it renders a link.",
+  "props": [
+    { "name": "variant", "type": "'solid' | 'outline' | 'ghost'", "values": ["solid", "outline", "ghost"], "default": "solid", "description": "Visual emphasis. One solid button per view or group; outline for secondary actions; ghost for low-emphasis or repeated actions." },
+    { "name": "color", "type": "'primary' | 'secondary' | 'danger'", "values": ["primary", "secondary", "danger"], "default": "primary", "description": "Intent. danger only for destructive, irreversible actions." },
+    { "name": "size", "type": "'sm' | 'md' | 'lg'", "values": ["sm", "md", "lg"], "default": "md", "description": "Control height. sm in dense UI (tables, toolbars), lg for a single hero action." },
+    { "name": "loading", "type": "boolean", "default": false, "description": "Shows a spinner and blocks clicks while the action runs." },
+    { "name": "startIcon", "type": "ReactNode", "description": "Icon before the label." },
+    { "name": "endIcon", "type": "ReactNode", "description": "Icon after the label (e.g. an arrow for 'Next')." },
+    { "name": "fullWidth", "type": "boolean", "default": false, "description": "Stretch to the container width. Use in narrow layouts and mobile forms." },
+    { "name": "href", "type": "string", "description": "Renders a link styled as a button. Use for navigation only." },
+    { "name": "sx", "type": "SxProps<Theme>", "description": "Layout-only overrides (margin, alignment). Never colors or sizes." }
+  ],
+  "variants": [
+    { "name": "solid", "intent": "The most important action in a view or group." },
+    { "name": "outline", "intent": "Secondary actions next to a solid button (e.g. Cancel)." },
+    { "name": "ghost", "intent": "Low-emphasis or repeated actions, e.g. in lists, toolbars, alerts." }
+  ],
+  "sizes": [
+    { "name": "sm", "intent": "Dense UI: tables, toolbars, inline with small text." },
+    { "name": "md", "intent": "Default for forms, cards and dialogs." },
+    { "name": "lg", "intent": "A single prominent call to action on a page." }
+  ],
+  "states": ["default", "hover", "focus-visible", "active", "disabled", "loading"],
+  "usage": {
+    "when": [
+      "The user performs an action that changes something (save, send, delete, create).",
+      "Confirming or cancelling a Dialog.",
+      "Submitting a form (type=\"submit\")."
+    ],
+    "whenNot": [
+      { "situation": "Navigating to another page as plain text in a sentence", "useInstead": "A text link" },
+      { "situation": "Toggling a setting on and off", "useInstead": "A switch or checkbox" },
+      { "situation": "An icon with no visible label", "useInstead": "MUI IconButton with aria-label" }
+    ],
+    "composition": [
+      "At most one solid primary Button per group of actions.",
+      "In a group, order is: ghost/outline actions first, the solid action last (right).",
+      "Destructive confirmation: color=\"danger\" variant=\"solid\", paired with an outline Cancel.",
+      "Labels are verbs that say what happens: \"Save changes\", not \"OK\"."
+    ],
+    "related": ["Dialog", "Card", "TextField"]
+  },
+  "tokens": [
+    "color.primary.background", "color.primary.background-hover", "color.primary.foreground", "color.primary.text",
+    "color.secondary.background", "color.secondary.background-hover", "color.secondary.foreground", "color.secondary.text",
+    "color.danger.background", "color.danger.background-hover", "color.danger.foreground", "color.danger.text",
+    "color.border.focus", "radius.control", "typography.label-md", "motion.duration.fast"
+  ],
+  "accessibility": {
+    "role": "button (or link when href is set)",
+    "keyboard": ["Tab focuses the button", "Enter or Space activates it"],
+    "notes": [
+      "The label must describe the action; icon-only buttons need aria-label.",
+      "While loading the button is disabled; announce the result elsewhere (e.g. an Alert)."
+    ]
+  },
+  "examples": [
+    { "title": "Primary action", "code": "<Button>Save changes</Button>" },
+    { "title": "Action group", "code": "<Button variant=\"outline\">Cancel</Button>\n<Button>Save</Button>" },
+    { "title": "Destructive", "code": "<Button color=\"danger\">Delete project</Button>" },
+    { "title": "Async", "code": "<Button loading={saving} onClick={save}>Save</Button>" }
+  ]
+}

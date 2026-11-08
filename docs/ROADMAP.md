@@ -15,8 +15,8 @@ at the AI Design Systems Conference 2026
 | 1 | **Foundations** — naming, token layers, brand contract, contrast rules, validator, `AGENTS.md`, trust levels, component metadata schema | Plant seeds, not trees · Colocate and name semantically · Set trust levels | ✅ Done |
 | 2 | **Token build** — `@jkcrespo/fabric-tokens`: CSS variables per brand × mode, typed JS/TS, agent manifest. Seed-color → contrast-safe ramp generator (`npm run create-brand`) | Design system as infrastructure | ✅ Done |
 | 3 | **MUI theme** — `@jkcrespo/fabric-theme`: `FabricProvider`, `createFabricTheme(brand)`, CSS-variables theme (one theme for all brands, mode switch without re-render), `FabricBrandScope`, typed `theme.fabric`. Tested in Chromium | — | ✅ Done |
-| 4 | **First components** — `@jkcrespo/fabric-react`: Button, TextField, Card, Alert, Dialog on MUI. Each ships a `*.meta.json` validated against `schemas/component.schema.json`. Storybook with brand + mode switcher | Make components machine-readable · Add intent | ⏭ Next |
-| 5 | **Agent access** — build a single manifest (tokens + component metadata). MCP server for on-demand lookups. Benchmark JSON vs Markdown on real prompts | Progressive disclosure · Benchmark before committing to a format | |
+| 4 | **First components** — `@jkcrespo/fabric-react`: Button, TextField, Card, Alert, Dialog on MUI. Each ships a `*.meta.json` checked against the schema *and* the TypeScript props (`npm run validate:components`). Storybook with brand + mode switcher; axe WCAG 2.1 AA on every story × brand × mode | Make components machine-readable · Add intent | ✅ Done |
+| 5 | **Agent access** — build a single manifest (tokens + component metadata). MCP server for on-demand lookups. Benchmark JSON vs Markdown on real prompts | Progressive disclosure · Benchmark before committing to a format | ⏭ Next |
 | 6 | **Self-healing loop** — lint for hard-coded values / primitive usage, drift score, scheduled agent QA that can only open issues | Observe → detect → suggest → fix → learn | |
 | 7 | **Publish** — npm packages, docs site, contribution guide, release automation | — | |
 
@@ -29,6 +29,10 @@ at the AI Design Systems Conference 2026
   disagree about what a token resolves to.
 - **MUI v9 with CSS variables.** Theme values are `var(--fabric-…)` references and
   `nativeColor` derives shades in CSS, so brands and modes switch without re-rendering.
+- **Small, intent-based component APIs** (`variant="solid"`, `color="danger"`) over
+  MUI's full prop surface: fewer choices, fewer wrong guesses by agents. Any MUI
+  component still works with the theme.
+- **Metadata checked against code.** A contract that can drift is worse than none.
 - **npm scope `@jkcrespo`**, packages named `fabric-*`. MIT license.
 - **MUI as the base** — accessibility and behavior come from MUI; Fabric owns tokens,
   theming and the agent layer.

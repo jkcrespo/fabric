@@ -1,0 +1,66 @@
+{
+  "$schema": "../../../../schemas/component.schema.json",
+  "name": "Dialog",
+  "status": "beta",
+  "category": "overlay",
+  "muiBase": "@mui/material/Dialog",
+  "intent": "Interrupts the user to make a decision or complete a short, focused task without leaving the page: confirm a destructive action, fill a small form. Blocks the page until closed. Contains a title, an optional description, optional content such as TextFields, and Buttons as actions.",
+  "props": [
+    { "name": "open", "type": "boolean", "required": true, "description": "Whether the dialog is shown." },
+    { "name": "onClose", "type": "() => void", "required": true, "description": "Called on close button, Escape or backdrop click." },
+    { "name": "title", "type": "string", "required": true, "description": "What the dialog is about; also its accessible name. Phrase confirmations as a question: \"Delete project?\"." },
+    { "name": "description", "type": "ReactNode", "description": "One or two sentences explaining the consequence. Read by screen readers." },
+    { "name": "children", "type": "ReactNode", "description": "Extra content such as a short form." },
+    { "name": "actions", "type": "ReactNode", "description": "Buttons, right-aligned. Cancel first, confirming action last." },
+    { "name": "size", "type": "'sm' | 'md' | 'lg'", "values": ["sm", "md", "lg"], "default": "sm", "description": "sm for confirmations, md for forms, lg for rich content." },
+    { "name": "dismissible", "type": "boolean", "default": true, "description": "Allow Escape, backdrop click and the close button. Turn off only while an action is in progress." }
+  ],
+  "sizes": [
+    { "name": "sm", "intent": "Confirmations and short messages." },
+    { "name": "md", "intent": "Forms with a few fields." },
+    { "name": "lg", "intent": "Rich content, previews." }
+  ],
+  "states": ["default"],
+  "usage": {
+    "when": [
+      "Confirming a destructive or irreversible action.",
+      "A short task (1–4 fields) that should not navigate away.",
+      "Critical information the user must acknowledge."
+    ],
+    "whenNot": [
+      { "situation": "Status messages and confirmations of success", "useInstead": "Alert or MUI Snackbar" },
+      { "situation": "Long forms or multi-step flows", "useInstead": "A full page" },
+      { "situation": "Content the user wants to compare with the page", "useInstead": "A side drawer or inline Card" }
+    ],
+    "composition": [
+      "Actions: <Button variant=\"outline\">Cancel</Button> then the confirming Button.",
+      "Destructive confirmation: confirming Button uses color=\"danger\" and repeats the verb (\"Delete\"), never \"OK\".",
+      "Never open a Dialog from inside another Dialog.",
+      "While saving, set loading on the confirm Button and dismissible={false}."
+    ],
+    "related": ["Button", "TextField", "Alert"]
+  },
+  "tokens": [
+    "color.surface.raised", "color.text.default", "color.text.subtle", "radius.container", "elevation.modal",
+    "typography.heading-sm", "typography.body-md", "space.lg", "motion.duration.normal", "motion.easing.enter", "motion.easing.exit"
+  ],
+  "accessibility": {
+    "role": "dialog (aria-modal), named by the title and described by the description",
+    "keyboard": [
+      "Focus moves into the dialog when it opens and returns to the trigger when it closes",
+      "Tab and Shift+Tab stay inside the dialog",
+      "Escape closes it when dismissible"
+    ],
+    "notes": ["The close button has the accessible name \"Close\"."]
+  },
+  "examples": [
+    {
+      "title": "Destructive confirmation",
+      "code": "<Dialog\n  open={open}\n  onClose={close}\n  title=\"Delete project?\"\n  description=\"This removes the project and its files for everyone. You can't undo this.\"\n  actions={<>\n    <Button variant=\"outline\" onClick={close}>Cancel</Button>\n    <Button color=\"danger\" onClick={remove}>Delete</Button>\n  </>}\n/>"
+    },
+    {
+      "title": "Short form",
+      "code": "<Dialog open={open} onClose={close} title=\"Invite teammate\" size=\"md\" actions={<Button onClick={invite}>Send invite</Button>}>\n  <TextField label=\"Email\" type=\"email\" />\n</Dialog>"
+    }
+  ]
+}
