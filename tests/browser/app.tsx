@@ -1,4 +1,5 @@
 // Test fixture: a page of real MUI components themed by Fabric.
+import '@fontsource-variable/noto-sans';
 import { createRoot } from 'react-dom/client';
 import { useEffect } from 'react';
 import { Alert, Button, Card, CardContent, Chip, Dialog, Stack, TextField, Typography } from '@mui/material';

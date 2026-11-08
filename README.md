@@ -54,6 +54,7 @@ Requires Node 20+.
 ## Use it in a React app
 
 ```tsx
+import '@fontsource-variable/noto-sans'; // Fabric's typeface
 import acme from '@jkcrespo/fabric-tokens/acme';
 import { FabricProvider, Button, Card } from '@jkcrespo/fabric-react';
 

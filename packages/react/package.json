@@ -40,5 +40,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "@fontsource-variable/noto-sans": "^5.3.0"
   }
 }

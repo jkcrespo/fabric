@@ -1,3 +1,4 @@
+import '@fontsource-variable/noto-sans';
 import { useEffect } from 'react';
 import type { Decorator, Preview } from '@storybook/react-vite';
 import allBrands from '@jkcrespo/fabric-tokens/all';

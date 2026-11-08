@@ -4,10 +4,11 @@ React components for [Fabric](https://github.com/jkcrespo/fabric), built on MUI.
 component has a small, intent-based API and a machine-readable contract for AI agents.
 
 ```bash
-npm install @jkcrespo/fabric-react @jkcrespo/fabric-tokens @mui/material @emotion/react @emotion/styled
+npm install @jkcrespo/fabric-react @jkcrespo/fabric-tokens @mui/material @emotion/react @emotion/styled @fontsource-variable/noto-sans
 ```
 
 ```tsx
+import '@fontsource-variable/noto-sans'; // the Fabric typeface — load once at the app entry
 import acme from '@jkcrespo/fabric-tokens/acme';
 import { FabricProvider, Card, TextField, Button } from '@jkcrespo/fabric-react';
 

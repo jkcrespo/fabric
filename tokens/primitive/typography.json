@@ -2,7 +2,7 @@
   "primitive": {
     "font-family": {
       "$type": "fontFamily",
-      "sans": { "$value": ["Inter", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif"] },
+      "sans": { "$value": ["Noto Sans Variable", "Noto Sans", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif"], "$description": "Noto Sans. Apps load it with @fontsource-variable/noto-sans (variable, weights 100–900); \"Noto Sans\" covers a self-hosted or system install." },
       "serif": { "$value": ["Georgia", "Cambria", "Times New Roman", "serif"] },
       "mono": { "$value": ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Consolas", "monospace"] }
     },

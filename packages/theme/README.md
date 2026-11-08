@@ -4,8 +4,11 @@ The MUI theme for [Fabric](https://github.com/jkcrespo/fabric). Any Fabric brand
 a complete MUI theme with light and dark modes.
 
 ```bash
-npm install @jkcrespo/fabric-theme @jkcrespo/fabric-tokens @mui/material @emotion/react @emotion/styled
+npm install @jkcrespo/fabric-theme @jkcrespo/fabric-tokens @mui/material @emotion/react @emotion/styled @fontsource-variable/noto-sans
 ```
+
+Load the typeface once at your app entry: `import '@fontsource-variable/noto-sans';`.
+Brands that use another font load that font instead.
 
 ## Use
 

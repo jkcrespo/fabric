@@ -42,4 +42,18 @@ tokens: tokens/semantic/typography.json
 | `typography.caption` | `caption` | Helper text, footnotes |
 | `typography.overline` | `overline` | Eyebrow above a heading |
 
-Fonts come from the brand (`brand.font-family.heading` / `body`).
+## Typeface
+
+Fabric's typeface is **Noto Sans** (`primitive.font-family.sans`), used for headings
+and body text in the default brand. It is open source (SIL Open Font License) and covers
+most of the world's scripts.
+
+Load it once at the app entry:
+
+```ts
+import '@fontsource-variable/noto-sans'; // one variable file, weights 100–900
+```
+
+The font stack falls back to `Noto Sans` (self-hosted or installed) and then system
+fonts. Fonts are brand-controlled (`brand.font-family.heading` / `body`): Acme, for
+example, uses a serif for headings and Noto Sans for body text.

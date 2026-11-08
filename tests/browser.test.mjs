@@ -27,10 +27,11 @@ before(async () => {
     bundle: true,
     outfile: join(dir, 'app.js'),
     jsx: 'automatic',
+    loader: { '.woff2': 'file', '.woff': 'file' },
     define: { 'process.env.NODE_ENV': '"development"' },
     logLevel: 'error',
   });
-  writeFileSync(join(dir, 'index.html'), '<!doctype html><html><head><meta charset="utf-8"></head><body><div id="root"></div><script src="app.js"></script></body></html>');
+  writeFileSync(join(dir, 'index.html'), '<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="app.css"></head><body><div id="root"></div><script src="app.js"></script></body></html>');
   browser = await chromium.launch();
 });
 after(() => browser?.close());
@@ -65,6 +66,10 @@ for (const brand of ['fabric', 'acme']) {
     assert.equal(await style('#h1', 'fontSize'), '48px');
     assert.ok((await style('#h1', 'fontFamily')).startsWith(t.typography.displayLg.fontFamily.split(',')[0]));
     assert.equal(await style('#btn', 'textTransform'), 'none');
+    // Noto Sans actually loads (not just named in the font stack)
+    await page.evaluate(() => document.fonts.ready);
+    assert.ok((await style('#btn', 'fontFamily')).startsWith('"Noto Sans Variable"'));
+    assert.ok(await page.evaluate(() => document.fonts.check('600 14px "Noto Sans Variable"')), 'Noto Sans loaded');
     // Alert colors are derived by MUI with color-mix: check they stay readable.
     const alertFg = await style('#alert', 'color');
     const alertBg = await style('#alert', 'backgroundColor');
