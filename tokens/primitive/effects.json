@@ -1,0 +1,24 @@
+{
+  "primitive": {
+    "shadow": {
+      "$type": "shadow",
+      "1": { "$value": { "color": "#0f172a1f", "offsetX": "0px", "offsetY": "1px", "blur": "2px", "spread": "0px" } },
+      "2": { "$value": { "color": "#0f172a24", "offsetX": "0px", "offsetY": "4px", "blur": "8px", "spread": "-2px" } },
+      "3": { "$value": { "color": "#0f172a29", "offsetX": "0px", "offsetY": "12px", "blur": "24px", "spread": "-4px" } },
+      "4": { "$value": { "color": "#0f172a33", "offsetX": "0px", "offsetY": "24px", "blur": "48px", "spread": "-8px" } }
+    },
+    "duration": {
+      "$type": "duration",
+      "100": { "$value": "100ms" },
+      "200": { "$value": "200ms" },
+      "300": { "$value": "300ms" },
+      "500": { "$value": "500ms" }
+    },
+    "easing": {
+      "$type": "cubicBezier",
+      "standard": { "$value": [0.2, 0, 0, 1] },
+      "decelerate": { "$value": [0, 0, 0, 1] },
+      "accelerate": { "$value": [0.3, 0, 1, 1] }
+    }
+  }
+}

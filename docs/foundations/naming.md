@@ -1,0 +1,55 @@
+---
+title: Naming conventions
+status: stable
+applies-to: [tokens, components, files]
+---
+
+# Naming conventions
+
+Names are the API that both humans and agents read. A name should tell you **what it is
+for**, not what it looks like.
+
+## Tokens
+
+**Format:** `<category>.<group>.<property>[-<state>]` — dot-separated, every segment
+lowercase kebab-case or a number.
+
+| Layer | Root | Example | Who may use it |
+| --- | --- | --- | --- |
+| Primitive | `primitive.` | `primitive.color.red.600` | Only brand and semantic tokens |
+| Brand | `brand.` | `brand.color.primary.600` | Only semantic tokens |
+| Semantic | `color.` `space.` `radius.` `typography.` `elevation.` `motion.` | `color.danger.background` | Components and product code |
+| Component *(later)* | `component.` | `component.button.padding-inline` | That one component |
+
+**Rules**
+- Semantic names describe intent: `color.danger.background`, never `color.red`.
+- Element before property, property before state: `color.primary.background-hover`.
+- States are suffixes: `-hover`, `-active`, `-disabled`, `-selected`.
+- Scales: numeric steps for primitives (`50 … 900`, `space.4`), t-shirt sizes for
+  semantic scales (`2xs xs sm md lg xl 2xl`).
+- No brand names inside semantic tokens. `color.primary`, not `color.acme-orange`.
+
+**Output names** (generated in step 2):
+
+| Target | Example |
+| --- | --- |
+| CSS variable | `--fabric-color-danger-background` |
+| JS / TS | `tokens.color.danger.background` |
+| MUI theme | `theme.palette.error.main` (see mapping in `docs/foundations/tokens.md`) |
+
+## Components
+
+- React components: `PascalCase`, no prefix inside the package (`Button`, `TextField`).
+- Same name as the MUI component they wrap when the behavior is the same.
+- Props: `camelCase`. Boolean props read as a statement: `disabled`, `fullWidth`, `loading`.
+- Variant values: lowercase kebab-case strings (`"solid"`, `"outline"`).
+
+## Files
+
+| Thing | Pattern |
+| --- | --- |
+| Token files | `tokens/<layer>/<topic>.json`, modes as `<topic>.<mode>.json` |
+| Brand | `tokens/brands/<brand-id>.json` — `brand-id` is kebab-case |
+| Component | `packages/react/src/<Name>/<Name>.tsx` |
+| Component metadata | `packages/react/src/<Name>/<name>.meta.json` |
+| Docs | `docs/<area>/<topic>.md` with YAML front-matter |

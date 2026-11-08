@@ -1,0 +1,14 @@
+{
+  "name": "fabric-design-system",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Open-source, white-label, agent-ready design system built on MUI.",
+  "license": "MIT",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "validate": "node scripts/validate-tokens.mjs",
+    "validate:json": "node scripts/validate-tokens.mjs --json"
+  },
+  "repository": { "type": "git", "url": "https://github.com/jkcrespo/fabric.git" }
+}

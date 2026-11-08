@@ -1,0 +1,40 @@
+{
+  "space": {
+    "$type": "dimension",
+    "$description": "Semantic spacing. Prefer these over primitive.space.* in product code.",
+    "2xs": { "$value": "{primitive.space.1}", "$description": "Hairline gaps: icon-to-label inside a dense control." },
+    "xs": { "$value": "{primitive.space.2}", "$description": "Tight gaps inside a component (chip padding, icon + text)." },
+    "sm": { "$value": "{primitive.space.3}", "$description": "Gaps between related controls in a group." },
+    "md": { "$value": "{primitive.space.4}", "$description": "Default padding inside cards and between form fields." },
+    "lg": { "$value": "{primitive.space.6}", "$description": "Separation between distinct groups within a section." },
+    "xl": { "$value": "{primitive.space.8}", "$description": "Separation between page sections." },
+    "2xl": { "$value": "{primitive.space.12}", "$description": "Large page-level rhythm: hero padding, section breaks." }
+  },
+  "radius": {
+    "$type": "dimension",
+    "control": { "$value": "{brand.radius.control}", "$description": "Corners of interactive controls: buttons, inputs, chips. Brand-controlled." },
+    "container": { "$value": "{brand.radius.container}", "$description": "Corners of containers: cards, dialogs, menus. Brand-controlled." },
+    "pill": { "$value": "{primitive.radius.full}", "$description": "Fully rounded: avatars, badges, toggle tracks." }
+  },
+  "elevation": {
+    "$type": "shadow",
+    "raised": { "$value": "{primitive.shadow.1}", "$description": "Resting cards that sit just above the page." },
+    "floating": { "$value": "{primitive.shadow.2}", "$description": "Menus, popovers, dropdowns — temporary layers anchored to a trigger." },
+    "overlay": { "$value": "{primitive.shadow.3}", "$description": "Drawers and sheets that cover part of the page." },
+    "modal": { "$value": "{primitive.shadow.4}", "$description": "Dialogs that block the page." }
+  },
+  "motion": {
+    "duration": {
+      "$type": "duration",
+      "fast": { "$value": "{primitive.duration.100}", "$description": "Micro feedback: hover, press, toggle." },
+      "normal": { "$value": "{primitive.duration.200}", "$description": "Default transitions: expand, fade, small moves." },
+      "slow": { "$value": "{primitive.duration.300}", "$description": "Large surfaces entering: drawers, dialogs." }
+    },
+    "easing": {
+      "$type": "cubicBezier",
+      "standard": { "$value": "{primitive.easing.standard}", "$description": "Elements moving within the screen." },
+      "enter": { "$value": "{primitive.easing.decelerate}", "$description": "Elements entering the screen." },
+      "exit": { "$value": "{primitive.easing.accelerate}", "$description": "Elements leaving the screen." }
+    }
+  }
+}

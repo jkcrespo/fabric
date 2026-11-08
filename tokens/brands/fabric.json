@@ -1,0 +1,44 @@
+{
+  "$description": "Fabric — the default reference brand. Copy this file to create a new brand.",
+  "brand": {
+    "color": {
+      "$type": "color",
+      "primary": {
+        "$description": "Indigo",
+        "50": { "$value": "#eef2ff" },
+        "100": { "$value": "#e0e7ff" },
+        "200": { "$value": "#c7d2fe" },
+        "300": { "$value": "#a5b4fc" },
+        "400": { "$value": "#818cf8" },
+        "500": { "$value": "#6366f1" },
+        "600": { "$value": "#4f46e5" },
+        "700": { "$value": "#4338ca" },
+        "800": { "$value": "#3730a3" },
+        "900": { "$value": "#312e81" }
+      },
+      "secondary": {
+        "$description": "Teal",
+        "50": { "$value": "#f0fdfa" },
+        "100": { "$value": "#ccfbf1" },
+        "200": { "$value": "#99f6e4" },
+        "300": { "$value": "#5eead4" },
+        "400": { "$value": "#2dd4bf" },
+        "500": { "$value": "#14b8a6" },
+        "600": { "$value": "#0f766e" },
+        "700": { "$value": "#115e59" },
+        "800": { "$value": "#134e4a" },
+        "900": { "$value": "#042f2e" }
+      }
+    },
+    "font-family": {
+      "$type": "fontFamily",
+      "heading": { "$value": "{primitive.font-family.sans}" },
+      "body": { "$value": "{primitive.font-family.sans}" }
+    },
+    "radius": {
+      "$type": "dimension",
+      "control": { "$value": "{primitive.radius.md}" },
+      "container": { "$value": "{primitive.radius.lg}" }
+    }
+  }
+}

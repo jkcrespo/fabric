@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/jkcrespo/fabric/schemas/component.schema.json",
+  "title": "Fabric component metadata",
+  "description": "Machine-readable contract for one component. One file per component: packages/react/src/<Name>/<name>.meta.json. Agents read this instead of prose docs.",
+  "type": "object",
+  "required": ["name", "status", "category", "muiBase", "intent", "props", "usage", "tokens", "accessibility"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "name": { "type": "string", "pattern": "^[A-Z][A-Za-z0-9]*$", "description": "Exported React component name." },
+    "status": { "enum": ["experimental", "beta", "stable", "deprecated"] },
+    "category": { "enum": ["action", "input", "display", "feedback", "navigation", "layout", "overlay"] },
+    "muiBase": {
+      "type": ["string", "null"],
+      "description": "The MUI component this wraps (e.g. \"@mui/material/Button\"), or null if built from scratch."
+    },
+    "intent": {
+      "type": "string",
+      "minLength": 20,
+      "description": "What the component is for and how it combines with others. Written for an agent deciding whether to use it."
+    },
+    "props": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "type", "description"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string", "description": "TypeScript type as written in the source." },
+          "values": { "type": "array", "items": { "type": ["string", "number", "boolean"] } },
+          "default": {},
+          "required": { "type": "boolean", "default": false },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "variants": { "$ref": "#/$defs/option-list", "description": "Visual emphasis options (e.g. solid, outline, ghost)." },
+    "sizes": { "$ref": "#/$defs/option-list" },
+    "states": {
+      "type": "array",
+      "items": { "enum": ["default", "hover", "focus-visible", "active", "disabled", "loading", "selected", "error", "read-only"] },
+      "uniqueItems": true
+    },
+    "usage": {
+      "type": "object",
+      "required": ["when", "whenNot"],
+      "additionalProperties": false,
+      "properties": {
+        "when": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "whenNot": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["situation", "useInstead"],
+            "properties": { "situation": { "type": "string" }, "useInstead": { "type": "string" } }
+          }
+        },
+        "composition": { "type": "array", "items": { "type": "string" }, "description": "Rules for combining with other components." },
+        "related": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "tokens": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^(color|space|radius|typography|elevation|motion|component)\\." },
+      "description": "Semantic or component tokens the component consumes. Never primitive.* or brand.*."
+    },
+    "accessibility": {
+      "type": "object",
+      "required": ["role", "keyboard"],
+      "properties": {
+        "role": { "type": "string" },
+        "keyboard": { "type": "array", "items": { "type": "string" } },
+        "notes": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "code"],
+        "properties": { "title": { "type": "string" }, "code": { "type": "string" } }
+      }
+    }
+  },
+  "$defs": {
+    "option-list": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "intent"],
+        "properties": { "name": { "type": "string" }, "intent": { "type": "string" } }
+      }
+    }
+  }
+}

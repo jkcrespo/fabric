@@ -1,0 +1,18 @@
+{
+  "$description": "The white-label contract. Every file in tokens/brands/ must define exactly these token paths. Semantic tokens only reach brand values through these paths, so a new brand is a single file.",
+  "required": {
+    "brand.color.primary": { "type": "color", "steps": ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"] },
+    "brand.color.secondary": { "type": "color", "steps": ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"] },
+    "brand.font-family.heading": { "type": "fontFamily" },
+    "brand.font-family.body": { "type": "fontFamily" },
+    "brand.radius.control": { "type": "dimension" },
+    "brand.radius.container": { "type": "dimension" }
+  },
+  "rules": [
+    "Step 600 is the light-mode fill (buttons, chips). It must reach 4.5:1 against white text.",
+    "Step 300 is the dark-mode fill. It must reach 4.5:1 against primitive.color.neutral.900 text.",
+    "Steps 50 and 900 are subtle backgrounds (light / dark). Step 700 / 300 text must reach 4.5:1 on them.",
+    "Brand values may be literals or references to primitive tokens. They may not reference semantic tokens.",
+    "Contrast is enforced by `npm run validate` using tokens/contrast-pairs.json."
+  ]
+}

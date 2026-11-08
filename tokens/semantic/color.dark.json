@@ -1,0 +1,66 @@
+{
+  "$description": "Semantic color — dark mode. Light and dark files must define identical token paths (enforced by validate).",
+  "color": {
+    "$type": "color",
+    "surface": {
+      "default": {"$value": "{primitive.color.neutral.900}", "$description": "Page / app background. The canvas everything sits on.", "$extensions": {"com.fabric": {"mui": "palette.background.default"}}},
+      "raised": {"$value": "{primitive.color.neutral.800}", "$description": "Cards, menus, dialogs — any surface lifted above the page.", "$extensions": {"com.fabric": {"mui": "palette.background.paper"}}},
+      "sunken": {"$value": "{primitive.color.neutral.950}", "$description": "Recessed areas: wells, code blocks, table headers."},
+      "inverse": {"$value": "{primitive.color.neutral.50}", "$description": "High-emphasis inverted surface: tooltips, snackbars."}
+    },
+    "text": {
+      "default": {"$value": "{primitive.color.neutral.50}", "$description": "Primary reading text and headings.", "$extensions": {"com.fabric": {"mui": "palette.text.primary"}}},
+      "subtle": {"$value": "{primitive.color.neutral.400}", "$description": "Secondary text: helper text, metadata, captions.", "$extensions": {"com.fabric": {"mui": "palette.text.secondary"}}},
+      "disabled": {"$value": "{primitive.color.neutral.600}", "$description": "Text of disabled controls. Exempt from contrast rules (WCAG 1.4.3).", "$extensions": {"com.fabric": {"mui": "palette.text.disabled"}}},
+      "inverse": {"$value": "{primitive.color.neutral.900}", "$description": "Text placed on color.surface.inverse."}
+    },
+    "border": {
+      "default": {"$value": "{primitive.color.neutral.700}", "$description": "Default outline for inputs and cards.", "$extensions": {"com.fabric": {"mui": "palette.divider"}}},
+      "subtle": {"$value": "{primitive.color.neutral.800}", "$description": "Low-emphasis dividers inside a surface."},
+      "strong": {"$value": "{primitive.color.neutral.500}", "$description": "High-emphasis outline: hovered inputs, selected cards."},
+      "focus": {"$value": "{brand.color.primary.300}", "$description": "Keyboard focus ring. Must stay visible against every surface."}
+    },
+    "primary": {
+      "background": {"$value": "{brand.color.primary.300}", "$description": "Solid fill for primary elements. The brand’s main call to action. Use once per view for the most important action.", "$extensions": {"com.fabric": {"mui": "palette.primary.main"}}},
+      "background-hover": {"$value": "{brand.color.primary.200}", "$description": "Hover/pressed fill for primary elements.", "$extensions": {"com.fabric": {"mui": "palette.primary.dark"}}},
+      "foreground": {"$value": "{primitive.color.neutral.900}", "$description": "Text and icons placed on color.primary.background.", "$extensions": {"com.fabric": {"mui": "palette.primary.contrastText"}}},
+      "text": {"$value": "{brand.color.primary.300}", "$description": "primary colored text or icon on a neutral surface (links, status labels)."},
+      "subtle": {"$value": "{brand.color.primary.900}", "$description": "Tinted low-emphasis primary background (alerts, selected rows, soft chips).", "$extensions": {"com.fabric": {"mui": "palette.primary.light"}}}
+    },
+    "secondary": {
+      "background": {"$value": "{brand.color.secondary.300}", "$description": "Solid fill for secondary elements. Brand accent for secondary emphasis. Never competes with primary.", "$extensions": {"com.fabric": {"mui": "palette.secondary.main"}}},
+      "background-hover": {"$value": "{brand.color.secondary.200}", "$description": "Hover/pressed fill for secondary elements.", "$extensions": {"com.fabric": {"mui": "palette.secondary.dark"}}},
+      "foreground": {"$value": "{primitive.color.neutral.900}", "$description": "Text and icons placed on color.secondary.background.", "$extensions": {"com.fabric": {"mui": "palette.secondary.contrastText"}}},
+      "text": {"$value": "{brand.color.secondary.300}", "$description": "secondary colored text or icon on a neutral surface (links, status labels)."},
+      "subtle": {"$value": "{brand.color.secondary.900}", "$description": "Tinted low-emphasis secondary background (alerts, selected rows, soft chips).", "$extensions": {"com.fabric": {"mui": "palette.secondary.light"}}}
+    },
+    "danger": {
+      "background": {"$value": "{primitive.color.red.300}", "$description": "Solid fill for danger elements. Destructive actions and errors.", "$extensions": {"com.fabric": {"mui": "palette.error.main"}}},
+      "background-hover": {"$value": "{primitive.color.red.200}", "$description": "Hover/pressed fill for danger elements.", "$extensions": {"com.fabric": {"mui": "palette.error.dark"}}},
+      "foreground": {"$value": "{primitive.color.neutral.900}", "$description": "Text and icons placed on color.danger.background.", "$extensions": {"com.fabric": {"mui": "palette.error.contrastText"}}},
+      "text": {"$value": "{primitive.color.red.300}", "$description": "danger colored text or icon on a neutral surface (links, status labels)."},
+      "subtle": {"$value": "{primitive.color.red.900}", "$description": "Tinted low-emphasis danger background (alerts, selected rows, soft chips).", "$extensions": {"com.fabric": {"mui": "palette.error.light"}}}
+    },
+    "warning": {
+      "background": {"$value": "{primitive.color.amber.300}", "$description": "Solid fill for warning elements. Caution: something needs attention but is not broken.", "$extensions": {"com.fabric": {"mui": "palette.warning.main"}}},
+      "background-hover": {"$value": "{primitive.color.amber.200}", "$description": "Hover/pressed fill for warning elements.", "$extensions": {"com.fabric": {"mui": "palette.warning.dark"}}},
+      "foreground": {"$value": "{primitive.color.neutral.900}", "$description": "Text and icons placed on color.warning.background.", "$extensions": {"com.fabric": {"mui": "palette.warning.contrastText"}}},
+      "text": {"$value": "{primitive.color.amber.300}", "$description": "warning colored text or icon on a neutral surface (links, status labels)."},
+      "subtle": {"$value": "{primitive.color.amber.900}", "$description": "Tinted low-emphasis warning background (alerts, selected rows, soft chips).", "$extensions": {"com.fabric": {"mui": "palette.warning.light"}}}
+    },
+    "success": {
+      "background": {"$value": "{primitive.color.green.300}", "$description": "Solid fill for success elements. Positive confirmation and completed states.", "$extensions": {"com.fabric": {"mui": "palette.success.main"}}},
+      "background-hover": {"$value": "{primitive.color.green.200}", "$description": "Hover/pressed fill for success elements.", "$extensions": {"com.fabric": {"mui": "palette.success.dark"}}},
+      "foreground": {"$value": "{primitive.color.neutral.900}", "$description": "Text and icons placed on color.success.background.", "$extensions": {"com.fabric": {"mui": "palette.success.contrastText"}}},
+      "text": {"$value": "{primitive.color.green.300}", "$description": "success colored text or icon on a neutral surface (links, status labels)."},
+      "subtle": {"$value": "{primitive.color.green.900}", "$description": "Tinted low-emphasis success background (alerts, selected rows, soft chips).", "$extensions": {"com.fabric": {"mui": "palette.success.light"}}}
+    },
+    "info": {
+      "background": {"$value": "{primitive.color.blue.300}", "$description": "Solid fill for info elements. Neutral, informative messages.", "$extensions": {"com.fabric": {"mui": "palette.info.main"}}},
+      "background-hover": {"$value": "{primitive.color.blue.200}", "$description": "Hover/pressed fill for info elements.", "$extensions": {"com.fabric": {"mui": "palette.info.dark"}}},
+      "foreground": {"$value": "{primitive.color.neutral.900}", "$description": "Text and icons placed on color.info.background.", "$extensions": {"com.fabric": {"mui": "palette.info.contrastText"}}},
+      "text": {"$value": "{primitive.color.blue.300}", "$description": "info colored text or icon on a neutral surface (links, status labels)."},
+      "subtle": {"$value": "{primitive.color.blue.900}", "$description": "Tinted low-emphasis info background (alerts, selected rows, soft chips).", "$extensions": {"com.fabric": {"mui": "palette.info.light"}}}
+    }
+  }
+}

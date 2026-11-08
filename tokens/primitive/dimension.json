@@ -1,0 +1,37 @@
+{
+  "primitive": {
+    "space": {
+      "$type": "dimension",
+      "$description": "4px grid. The key is the multiplier, so primitive.space.4 = 16px = MUI theme.spacing(4).",
+      "0": { "$value": "0px" },
+      "1": { "$value": "4px" },
+      "2": { "$value": "8px" },
+      "3": { "$value": "12px" },
+      "4": { "$value": "16px" },
+      "5": { "$value": "20px" },
+      "6": { "$value": "24px" },
+      "8": { "$value": "32px" },
+      "10": { "$value": "40px" },
+      "12": { "$value": "48px" },
+      "16": { "$value": "64px" }
+    },
+    "radius": {
+      "$type": "dimension",
+      "none": { "$value": "0px" },
+      "sm": { "$value": "4px" },
+      "md": { "$value": "8px" },
+      "lg": { "$value": "12px" },
+      "xl": { "$value": "16px" },
+      "full": { "$value": "9999px" }
+    },
+    "breakpoint": {
+      "$type": "dimension",
+      "$description": "Matches MUI default breakpoints.",
+      "xs": { "$value": "0px" },
+      "sm": { "$value": "600px" },
+      "md": { "$value": "900px" },
+      "lg": { "$value": "1200px" },
+      "xl": { "$value": "1536px" }
+    }
+  }
+}
