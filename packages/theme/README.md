@@ -52,16 +52,18 @@ to avoid a flash of the wrong mode.
   The brand's CSS decides the values, so one theme works for every brand.
 - MUI's `nativeColor` option derives hover and disabled shades with CSS `color-mix()`.
 - Tokens MUI has no slot for are on `theme.fabric`, typed:
-  `theme.fabric.color.surface.sunken`, `theme.fabric.radius.container`.
-- Spacing unit is 4px: `theme.spacing(4)` = 16px = `space.md`.
+  `theme.fabric.color.surface.sunken`, `theme.fabric.space.betweenButtons`, `theme.fabric.radius.cardLg`.
+- Spacing unit is 4px: `theme.spacing(4)` = 16px = `space.400`.
 
 | Fabric | MUI |
 | --- | --- |
 | `color.<role>.background / background-hover / subtle / foreground` | `palette.<role>.main / dark / light / contrastText` |
 | `color.danger.*` | `palette.error.*` |
-| `typography.display-lg … overline` | `typography.h1 … overline` |
-| `radius.control` | `shape.borderRadius` (buttons, inputs, chips) |
-| `radius.container` | Paper, Card, Dialog |
+| `typography.display-lg … overline` | `typography.h1 … overline` (no uppercase on buttons or overline) |
+| `radius.button` | Button |
+| `radius.input` | `shape.borderRadius` (text fields, selects, chips) |
+| `radius.card-md` | Paper, Card, menus, popovers |
+| `radius.card-lg` | Dialog |
 | `elevation.raised / floating / overlay / modal` | `shadows[1–2] / [3–8] / [9–16] / [17–24]` |
 | `color.border.focus` | focus ring on every focusable MUI component |
 

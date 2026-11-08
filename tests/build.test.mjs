@@ -26,6 +26,11 @@ test('css exposes semantic tokens only, with a dark block', () => {
   assert.match(css, /--fabric-color-primary-background: #4f46e5;/);
   assert.match(css, /\[data-fabric-mode="dark"\] \{[^}]*--fabric-color-primary-background: #a5b4fc;/s);
   assert.match(css, /--fabric-typography-body-md-font-size: 1rem;/);
+  assert.match(css, /--fabric-space-400: 16px;/);
+  assert.match(css, /--fabric-space-between-buttons: 12px;/);
+  assert.match(css, /--fabric-space-negative-600: -24px;/);
+  assert.match(css, /--fabric-radius-button: 10000px;/);
+  assert.match(css, /--fabric-radius-card-lg: 12px;/);
   assert.doesNotMatch(css, /--fabric-primitive-|--fabric-brand-/);
 });
 
@@ -33,16 +38,19 @@ test('js exports resolved values and var() references', async () => {
   const acme = await import(pathToFileURL(join(out, 'acme.js')));
   assert.equal(acme.tokens.light.color.primary.background, '#c2410c');
   assert.equal(acme.tokens.dark.color.surface.default, '#0f172a');
-  assert.equal(acme.tokens.light.radius.control, '4px');
+  assert.equal(acme.tokens.light.radius.button, '2px');
+  assert.equal(acme.tokens.light.space.betweenInputs, '16px');
+  assert.equal(acme.tokens.light.space['3200'], '128px');
   assert.match(acme.tokens.light.typography.headingLg.fontFamily, /^Georgia/);
   assert.equal(acme.vars.color.primary.backgroundHover, 'var(--fabric-color-primary-background-hover)');
   assert.equal(acme.vars.typography.bodyMd.fontSize, 'var(--fabric-typography-body-md-font-size)');
   assert.equal(acme.breakpoints.md, 900);
 });
 
-test('manifest describes every token for agents', () => {
+test('manifest describes every token for agents', async () => {
   const m = JSON.parse(readFileSync(join(out, 'manifest.json'), 'utf8'));
-  assert.equal(m.tokens.length, 75);
+  const { loadLayers, semanticIds } = await import('../scripts/lib/tokens.mjs');
+  assert.equal(m.tokens.length, semanticIds(loadLayers(), 'light').length);
   const t = m.tokens.find((x) => x.id === 'color.danger.background');
   assert.equal(t.mui, 'palette.error.main');
   assert.equal(t.cssVar, '--fabric-color-danger-background');

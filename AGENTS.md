@@ -30,10 +30,30 @@ color and type — and you will guess wrong.
 Each role has: `background`, `background-hover`, `foreground`, `text`, `subtle`.
 Neutrals live in `color.surface.*`, `color.text.*`, `color.border.*`.
 
-**Spacing** — 4px grid. Use `space.2xs … space.2xl`. MUI `theme.spacing(n)` = `n × 4px`.
+**Spacing** — 4px grid (`docs/foundations/spacing.md`).
+- Use a relationship token when one fits: `space.between-sections` (32), `between-buttons`
+  (12), `content-to-buttons` (24), `between-cards` (16), `between-inputs` (16),
+  `icon-to-text` (8), `title-to-content-far` (16), `container-padding` (24),
+  `card-padding` (16). `-near` = tighter, `-far` = looser.
+- Otherwise use the scale `space.000 … space.3200` (name = px × 25). Default `space.400`
+  (16px); `space.300` (12px) for a tighter but clear relationship.
+- Gap between siblings, padding inside containers, margin outside an element.
+  Negative space only for intentional overlaps.
+- MUI `theme.spacing(n)` = `n × 4px`, so `space.400` = `theme.spacing(4)`.
+
+**Radius** — apply the assigned token (`docs/foundations/radius.md`): buttons
+`radius.button`, inputs `radius.input`, cards `radius.card-sm/md/lg`, dialogs
+`radius.card-lg`. Never pick a radius by eye.
 
 **Typography** — use the semantic styles (`typography.body-md`, `typography.heading-sm`…).
-Do not set font size, weight or family directly.
+Do not set font size, weight or family directly. Rules (`docs/foundations/typography.md`):
+- Text and icons use Content colors (`color.text.default` / `subtle`); Signal and Brand
+  colors only for emphasis, status or brand expression.
+- Emphasis through scale and weight, never text case. No all-caps.
+- No ad hoc bold, underline or italics on top of a text style.
+- Never use Background (`color.surface.*`) or Stroke (`color.border.*`) colors on text.
+- `color.text.tertiary` never for essential, informational or interactive text.
+- Text contrast ≥ 4.5:1 (WCAG AA).
 
 **Components**
 5. Use a Fabric component when one fits (`Button`, `TextField`, `Card`, `Alert`,
@@ -56,6 +76,7 @@ Anything brand-specific comes from `tokens/brands/<brand>.json` through semantic
 | How to use tokens in CSS / JS | `packages/tokens/README.md` |
 | How Fabric maps onto MUI (palette, typography, shadows, radius) | `packages/theme/README.md` |
 | The rules for naming anything | `docs/foundations/naming.md` |
+| Spacing, radius, typography rules | `docs/foundations/spacing.md` · `radius.md` · `typography.md` |
 | How layers, brands and modes fit together | `docs/foundations/tokens.md` |
 | What a brand must define | `tokens/brand-contract.json` · create one with `npm run create-brand` |
 | Required contrast pairs | `tokens/contrast-pairs.json` |

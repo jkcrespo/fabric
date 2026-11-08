@@ -55,9 +55,11 @@ for (const brand of ['fabric', 'acme']) {
     const t = tokens[brand].light;
     assert.equal(await style('#btn', 'backgroundColor'), rgb(t.color.primary.background));
     assert.equal(await style('#btn', 'color'), rgb(t.color.primary.foreground));
-    assert.equal(await style('#btn', 'borderRadius'), t.radius.control);
+    assert.equal(await style('#btn', 'borderRadius'), t.radius.button);
+    assert.equal(await style('.MuiOutlinedInput-root:has(#field)', 'borderRadius'), t.radius.input);
     assert.equal(await style('#chip', 'backgroundColor'), rgb(t.color.primary.background));
-    assert.equal(await style('#card', 'borderRadius'), t.radius.container);
+    assert.equal(await style('#card', 'borderRadius'), t.radius.cardMd);
+    assert.equal(await style('#dialog-paper', 'borderRadius'), t.radius.cardLg);
     assert.equal(await style('#card', 'backgroundColor'), rgb(t.color.surface.raised));
     assert.equal(await style('body', 'backgroundColor'), rgb(t.color.surface.default));
     assert.equal(await style('#h1', 'fontSize'), '48px');

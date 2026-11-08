@@ -20,7 +20,7 @@ primitive  ──►  brand  ──►  semantic  ──►  (component)  ──
 | Layer | Folder | Holds | Rule (enforced by `npm run validate`) |
 | --- | --- | --- | --- |
 | Primitive | `tokens/primitive/` | Neutral & status palettes, spacing, radius, type scale, shadows, motion | Literal values only |
-| Brand | `tokens/brands/` | Primary + secondary ramps, heading/body font, control/container radius | Literals or refs to primitives. Must match `brand-contract.json` exactly |
+| Brand | `tokens/brands/` | Primary + secondary ramps, heading/body font, radius for buttons, inputs and cards | Literals or refs to primitives. Must match `brand-contract.json` exactly |
 | Semantic | `tokens/semantic/` | Intent-named tokens | References only, every token has a `$description` |
 
 ## Why brands only touch a few paths
@@ -33,7 +33,7 @@ gets the same accessibility guarantees for free. To add a brand:
 
 ```bash
 npm run create-brand -- my-brand --primary "#0f62fe" --secondary "#8a3ffc" \
-  --heading serif --radius-control sm
+  --heading serif --radius-button 200
 npm run validate && npm run build
 ```
 
@@ -81,7 +81,7 @@ token as `$extensions["com.fabric"].mui`, so it is machine-readable. Summary:
 | `color.text.default` / `subtle` / `disabled` | `palette.text.primary` / `secondary` / `disabled` |
 | `color.border.default` | `palette.divider` |
 | `typography.display-lg … overline` | `typography.h1 … overline` |
-| `radius.control` | `shape.borderRadius` |
+| `radius.button` / `radius.input` / `radius.card-*` | Button / `shape.borderRadius` / Paper, Card, Dialog — see `docs/foundations/radius.md` |
 | `space.*` | `spacing` (4px unit) |
 | `primitive.breakpoint.*` | `breakpoints.values` |
 

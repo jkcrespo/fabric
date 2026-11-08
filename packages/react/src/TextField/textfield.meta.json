@@ -4,60 +4,203 @@
   "status": "beta",
   "category": "input",
   "muiBase": "@mui/material/TextField",
-  "intent": "Lets the user enter or edit short text, numbers, emails or passwords, or longer text with multiline. Always has a visible label; shows guidance and validation errors underneath. Combine inside forms, Cards and Dialogs, stacked vertically with space.md between fields.",
+  "intent": "Lets the user enter or edit short text, numbers, emails or passwords, or longer text with multiline. Always has a visible label; shows guidance and validation errors underneath. Combine inside forms, Cards and Dialogs, stacked vertically with space.between-inputs (16px) between fields.",
   "props": [
-    { "name": "label", "type": "string", "required": true, "description": "Visible label. Never rely on placeholder as the label." },
-    { "name": "name", "type": "string", "description": "Form field name." },
-    { "name": "value", "type": "string", "description": "Controlled value." },
-    { "name": "defaultValue", "type": "string", "description": "Initial value when uncontrolled." },
-    { "name": "onChange", "type": "(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void", "description": "Called on every change." },
-    { "name": "onBlur", "type": "(event: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void", "description": "Called when the field loses focus — validate here." },
-    { "name": "type", "type": "'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search'", "values": ["text", "email", "password", "number", "tel", "url", "search"], "default": "text", "description": "Input type; picks the mobile keyboard and autofill." },
-    { "name": "placeholder", "type": "string", "description": "An example of the expected format." },
-    { "name": "helperText", "type": "ReactNode", "description": "Short guidance under the field. Replaced by error." },
-    { "name": "error", "type": "string", "description": "Error message. Puts the field in the error state; say what is wrong and how to fix it." },
-    { "name": "required", "type": "boolean", "default": false, "description": "Marks the field as required." },
-    { "name": "disabled", "type": "boolean", "default": false, "description": "Not editable and not submitted." },
-    { "name": "readOnly", "type": "boolean", "default": false, "description": "Visible and submitted but not editable." },
-    { "name": "multiline", "type": "boolean", "default": false, "description": "Text area for longer input." },
-    { "name": "rows", "type": "number", "description": "Visible rows when multiline." },
-    { "name": "size", "type": "'sm' | 'md'", "values": ["sm", "md"], "default": "md", "description": "sm for dense layouts like tables and filters." },
-    { "name": "fullWidth", "type": "boolean", "default": true, "description": "Stretch to the container width." },
-    { "name": "autoComplete", "type": "string", "description": "Autofill hint, e.g. \"email\", \"current-password\", \"postal-code\"." },
-    { "name": "id", "type": "string", "description": "Element id. Generated when omitted." },
-    { "name": "inputRef", "type": "Ref<HTMLInputElement | HTMLTextAreaElement>", "description": "Ref to the input element, e.g. to focus it." },
-    { "name": "sx", "type": "SxProps<Theme>", "description": "Layout-only overrides." }
+    {
+      "name": "label",
+      "type": "string",
+      "required": true,
+      "description": "Visible label. Never rely on placeholder as the label."
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Form field name."
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "description": "Controlled value."
+    },
+    {
+      "name": "defaultValue",
+      "type": "string",
+      "description": "Initial value when uncontrolled."
+    },
+    {
+      "name": "onChange",
+      "type": "(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void",
+      "description": "Called on every change."
+    },
+    {
+      "name": "onBlur",
+      "type": "(event: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void",
+      "description": "Called when the field loses focus — validate here."
+    },
+    {
+      "name": "type",
+      "type": "'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search'",
+      "values": [
+        "text",
+        "email",
+        "password",
+        "number",
+        "tel",
+        "url",
+        "search"
+      ],
+      "default": "text",
+      "description": "Input type; picks the mobile keyboard and autofill."
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "description": "An example of the expected format."
+    },
+    {
+      "name": "helperText",
+      "type": "ReactNode",
+      "description": "Short guidance under the field. Replaced by error."
+    },
+    {
+      "name": "error",
+      "type": "string",
+      "description": "Error message. Puts the field in the error state; say what is wrong and how to fix it."
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": false,
+      "description": "Marks the field as required."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "description": "Not editable and not submitted."
+    },
+    {
+      "name": "readOnly",
+      "type": "boolean",
+      "default": false,
+      "description": "Visible and submitted but not editable."
+    },
+    {
+      "name": "multiline",
+      "type": "boolean",
+      "default": false,
+      "description": "Text area for longer input."
+    },
+    {
+      "name": "rows",
+      "type": "number",
+      "description": "Visible rows when multiline."
+    },
+    {
+      "name": "size",
+      "type": "'sm' | 'md'",
+      "values": [
+        "sm",
+        "md"
+      ],
+      "default": "md",
+      "description": "sm for dense layouts like tables and filters."
+    },
+    {
+      "name": "fullWidth",
+      "type": "boolean",
+      "default": true,
+      "description": "Stretch to the container width."
+    },
+    {
+      "name": "autoComplete",
+      "type": "string",
+      "description": "Autofill hint, e.g. \"email\", \"current-password\", \"postal-code\"."
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "description": "Element id. Generated when omitted."
+    },
+    {
+      "name": "inputRef",
+      "type": "Ref<HTMLInputElement | HTMLTextAreaElement>",
+      "description": "Ref to the input element, e.g. to focus it."
+    },
+    {
+      "name": "sx",
+      "type": "SxProps<Theme>",
+      "description": "Layout-only overrides."
+    }
   ],
   "sizes": [
-    { "name": "sm", "intent": "Dense UI: tables, filter bars, toolbars." },
-    { "name": "md", "intent": "Default for forms." }
+    {
+      "name": "sm",
+      "intent": "Dense UI: tables, filter bars, toolbars."
+    },
+    {
+      "name": "md",
+      "intent": "Default for forms."
+    }
   ],
-  "states": ["default", "hover", "focus-visible", "disabled", "error", "read-only"],
+  "states": [
+    "default",
+    "hover",
+    "focus-visible",
+    "disabled",
+    "error",
+    "read-only"
+  ],
   "usage": {
     "when": [
       "Free-form input the user types: names, emails, search terms, comments.",
       "Numbers where a slider or stepper would be slower."
     ],
     "whenNot": [
-      { "situation": "Choosing one option from a known list", "useInstead": "A select or radio group" },
-      { "situation": "Yes/no choices", "useInstead": "A checkbox or switch" },
-      { "situation": "Picking a date", "useInstead": "A date picker" }
+      {
+        "situation": "Choosing one option from a known list",
+        "useInstead": "A select or radio group"
+      },
+      {
+        "situation": "Yes/no choices",
+        "useInstead": "A checkbox or switch"
+      },
+      {
+        "situation": "Picking a date",
+        "useInstead": "A date picker"
+      }
     ],
     "composition": [
-      "Stack fields vertically with space.md between them.",
+      "Stack fields vertically with space.between-inputs (16px) between them.",
       "Show errors after blur or submit, not while the user is still typing.",
       "Put the submit Button after the last field, aligned with the fields."
     ],
-    "related": ["Button", "Card", "Dialog"]
+    "related": [
+      "Button",
+      "Card",
+      "Dialog"
+    ]
   },
   "tokens": [
-    "color.surface.default", "color.text.default", "color.text.subtle", "color.text.disabled",
-    "color.border.default", "color.border.strong", "color.primary.background", "color.danger.text",
-    "radius.control", "typography.body-md", "typography.caption", "space.md"
+    "color.surface.default",
+    "color.text.default",
+    "color.text.subtle",
+    "color.text.disabled",
+    "color.border.default",
+    "color.border.strong",
+    "color.primary.background",
+    "color.danger.text",
+    "radius.input",
+    "typography.body-md",
+    "typography.caption",
+    "space.between-inputs"
   ],
   "accessibility": {
     "role": "textbox",
-    "keyboard": ["Tab focuses the field", "Typing edits the value"],
+    "keyboard": [
+      "Tab focuses the field",
+      "Typing edits the value"
+    ],
     "notes": [
       "The label is linked to the input; helper and error text are linked with aria-describedby.",
       "Error state sets aria-invalid. The message must explain how to fix the problem.",
@@ -65,8 +208,17 @@
     ]
   },
   "examples": [
-    { "title": "Email", "code": "<TextField label=\"Email\" type=\"email\" autoComplete=\"email\" required />" },
-    { "title": "With error", "code": "<TextField label=\"Email\" value={email} onChange={e => setEmail(e.target.value)} error=\"Enter an email like name@company.com\" />" },
-    { "title": "Multiline", "code": "<TextField label=\"Message\" multiline rows={4} helperText=\"Max 500 characters\" />" }
+    {
+      "title": "Email",
+      "code": "<TextField label=\"Email\" type=\"email\" autoComplete=\"email\" required />"
+    },
+    {
+      "title": "With error",
+      "code": "<TextField label=\"Email\" value={email} onChange={e => setEmail(e.target.value)} error=\"Enter an email like name@company.com\" />"
+    },
+    {
+      "title": "Multiline",
+      "code": "<TextField label=\"Message\" multiline rows={4} helperText=\"Max 500 characters\" />"
+    }
   ]
 }

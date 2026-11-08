@@ -37,8 +37,11 @@
     },
     "radius": {
       "$type": "dimension",
-      "control": { "$value": "{primitive.radius.md}" },
-      "container": { "$value": "{primitive.radius.lg}" }
+      "button": { "$value": "{primitive.radius.full}" },
+      "input": { "$value": "{primitive.radius.200}" },
+      "card-sm": { "$value": "{primitive.radius.150}" },
+      "card-md": { "$value": "{primitive.radius.200}" },
+      "card-lg": { "$value": "{primitive.radius.300}" }
     }
   }
 }

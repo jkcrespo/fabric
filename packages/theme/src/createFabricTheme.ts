@@ -98,7 +98,8 @@ export function createFabricTheme(brand: FabricBrand, overrides: ThemeOptions = 
       },
       fabric: v,
       spacing: 4,
-      shape: { borderRadius: v.radius.control },
+      // MUI's single radius goes to input controls (text fields, selects, chips, toggles).
+      shape: { borderRadius: v.radius.input },
       shadows: shadows(v),
       breakpoints: { values: brand.breakpoints },
       typography: {
@@ -106,7 +107,8 @@ export function createFabricTheme(brand: FabricBrand, overrides: ThemeOptions = 
         fontFamily: v.typography.bodyMd.fontFamily,
         ...typography,
         button: { ...typography.button, textTransform: 'none' },
-        overline: { ...typography.overline, textTransform: 'uppercase' },
+        // Emphasis through scale and weight, not text case.
+        overline: { ...typography.overline, textTransform: 'none' },
       },
       transitions: {
         duration: {
@@ -126,11 +128,13 @@ export function createFabricTheme(brand: FabricBrand, overrides: ThemeOptions = 
         },
       },
       components: {
-        // Containers use the container radius; controls use theme.shape (control radius).
+        // Radius logic: buttons → radius.button, inputs → theme.shape (radius.input),
+        // menus/popovers/cards → radius.card-md, dialogs → radius.card-lg.
+        MuiButton: { styleOverrides: { root: { borderRadius: v.radius.button } } },
         // Dark surfaces come from color.surface.* tokens, so drop MUI's elevation overlay.
-        MuiPaper: { styleOverrides: { root: { backgroundImage: 'none' }, rounded: { borderRadius: v.radius.container } } },
-        MuiCard: { styleOverrides: { root: { borderRadius: v.radius.container } } },
-        MuiDialog: { styleOverrides: { paper: { borderRadius: v.radius.container } } },
+        MuiPaper: { styleOverrides: { root: { backgroundImage: 'none' }, rounded: { borderRadius: v.radius.cardMd } } },
+        MuiCard: { styleOverrides: { root: { borderRadius: v.radius.cardMd } } },
+        MuiDialog: { styleOverrides: { paper: { borderRadius: v.radius.cardLg } } },
         // One visible focus ring everywhere, in the brand's focus color.
         MuiButtonBase: {
           styleOverrides: {

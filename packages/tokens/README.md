@@ -14,8 +14,8 @@ in `manifest.json`.
 
 .card {
   background: var(--fabric-color-surface-raised);
-  padding: var(--fabric-space-md);
-  border-radius: var(--fabric-radius-container);
+  padding: var(--fabric-space-card-padding);
+  border-radius: var(--fabric-radius-card-md);
 }
 ```
 

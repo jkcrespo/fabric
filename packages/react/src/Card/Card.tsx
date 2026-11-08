@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import type { SxProps, Theme } from '@mui/material/styles';
 
 export type CardVariant = 'elevated' | 'outlined';
-export type CardPadding = 'sm' | 'md' | 'lg';
+export type CardSize = 'sm' | 'md' | 'lg';
 
 export interface CardProps {
   /** Card heading. */
@@ -18,8 +18,8 @@ export interface CardProps {
   actions?: ReactNode;
   /** `elevated` (shadow) on page backgrounds; `outlined` (border) inside other surfaces or dense grids. */
   variant?: CardVariant;
-  /** Inner spacing, from the space tokens. */
-  padding?: CardPadding;
+  /** Sets radius and padding together: sm (6px radius, 12px padding), md (8px, 16px), lg (12px, 24px). */
+  size?: CardSize;
   children?: ReactNode;
   /** Accessible name when the card has no title. */
   'aria-label'?: string;
@@ -27,21 +27,42 @@ export interface CardProps {
   sx?: SxProps<Theme>;
 }
 
+/** Radius and spacing tokens per size (Fabric radius logic + spacing relationships). */
+const SIZE = {
+  sm: { radius: 'cardSm', padding: 'cardPaddingNear', titleToContent: 'titleToContentNear' },
+  md: { radius: 'cardMd', padding: 'cardPadding', titleToContent: 'titleToContentFar' },
+  lg: { radius: 'cardLg', padding: 'containerPadding', titleToContent: 'titleToContentFar' },
+} as const;
+
 /** Groups related content and actions on a raised surface. */
 export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
-  { title, subtitle, headingLevel = 3, actions, variant = 'elevated', padding = 'md', children, sx, ...rest },
+  { title, subtitle, headingLevel = 3, actions, variant = 'elevated', size = 'md', children, sx, ...rest },
   ref
 ) {
+  const hasHeader = Boolean(title || subtitle);
   return (
     <MuiCard
       ref={ref}
       variant={variant === 'outlined' ? 'outlined' : 'elevation'}
       elevation={variant === 'outlined' ? 0 : 1}
-      sx={[(t) => ({ p: t.fabric.space[padding], display: 'flex', flexDirection: 'column', gap: t.fabric.space.md }), ...(Array.isArray(sx) ? sx : [sx])]}
+      sx={[
+        (t) => ({
+          borderRadius: t.fabric.radius[SIZE[size].radius],
+          p: t.fabric.space[SIZE[size].padding],
+          display: 'flex',
+          flexDirection: 'column',
+        }),
+        ...(Array.isArray(sx) ? sx : [sx]),
+      ]}
       {...rest}
     >
-      {(title || subtitle) && (
-        <Stack sx={{ gap: (t) => t.fabric.space['2xs'] }}>
+      {hasHeader && (
+        <Stack
+          sx={(t) => ({
+            gap: t.fabric.space.betweenTitlesNear,
+            mb: children || actions ? t.fabric.space[SIZE[size].titleToContent] : 0,
+          })}
+        >
           {title && (
             <Typography variant="h5" component={`h${headingLevel}`}>
               {title}
@@ -56,7 +77,15 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
       )}
       {children}
       {actions && (
-        <Stack direction="row" sx={{ gap: (t) => t.fabric.space.xs, justifyContent: 'flex-end', flexWrap: 'wrap' }}>
+        <Stack
+          direction="row"
+          sx={(t) => ({
+            gap: t.fabric.space.betweenButtons,
+            mt: children ? t.fabric.space.contentToButtons : 0,
+            justifyContent: 'flex-end',
+            flexWrap: 'wrap',
+          })}
+        >
           {actions}
         </Stack>
       )}

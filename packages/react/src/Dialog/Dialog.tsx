@@ -49,21 +49,42 @@ export function Dialog({ open, onClose, title, description, children, actions, s
       aria-labelledby={titleId}
       aria-describedby={description ? descriptionId : undefined}
     >
-      <DialogTitle id={titleId} variant="h5" component="h2" sx={{ pr: dismissible ? 12 : undefined }}>
+      <DialogTitle
+        id={titleId}
+        variant="h5"
+        component="h2"
+        sx={(t) => ({
+          px: t.fabric.space.containerPadding,
+          pt: t.fabric.space.containerPadding,
+          pb: t.fabric.space.titleToContentNear,
+          pr: dismissible ? t.fabric.space['1200'] : t.fabric.space.containerPadding,
+        })}
+      >
         {title}
       </DialogTitle>
       {dismissible && (
-        <IconButton aria-label="Close" onClick={onClose} sx={{ position: 'absolute', top: 12, right: 12 }}>
+        <IconButton aria-label="Close" onClick={onClose} sx={(t) => ({ position: 'absolute', top: t.fabric.space['300'], right: t.fabric.space['300'] })}>
           <CloseIcon />
         </IconButton>
       )}
       {(description || children) && (
-        <DialogContent>
+        <DialogContent sx={(t) => ({ px: t.fabric.space.containerPadding, pb: actions ? 0 : t.fabric.space.containerPadding })}>
           {description && <DialogContentText id={descriptionId}>{description}</DialogContentText>}
           {children}
         </DialogContent>
       )}
-      {actions && <DialogActions sx={{ px: 6, pb: 5, gap: 2 }}>{actions}</DialogActions>}
+      {actions && (
+        <DialogActions
+          sx={(t) => ({
+            p: t.fabric.space.containerPadding,
+            pt: t.fabric.space.contentToButtons,
+            gap: t.fabric.space.betweenButtons,
+            '& > :not(style) ~ :not(style)': { ml: 0 },
+          })}
+        >
+          {actions}
+        </DialogActions>
+      )}
     </MuiDialog>
   );
 }

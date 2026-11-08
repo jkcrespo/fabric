@@ -9,10 +9,11 @@
       "inverse": {"$value": "{primitive.color.neutral.900}", "$description": "High-emphasis inverted surface: tooltips, snackbars."}
     },
     "text": {
-      "default": {"$value": "{primitive.color.neutral.900}", "$description": "Primary reading text and headings.", "$extensions": {"com.fabric": {"mui": "palette.text.primary"}}},
-      "subtle": {"$value": "{primitive.color.neutral.600}", "$description": "Secondary text: helper text, metadata, captions.", "$extensions": {"com.fabric": {"mui": "palette.text.secondary"}}},
+      "default": {"$value": "{primitive.color.neutral.900}", "$description": "Content Primary: reading text, headings and icons.", "$extensions": {"com.fabric": {"mui": "palette.text.primary"}}},
+      "subtle": {"$value": "{primitive.color.neutral.600}", "$description": "Content Secondary: helper text, metadata, captions.", "$extensions": {"com.fabric": {"mui": "palette.text.secondary"}}},
       "disabled": {"$value": "{primitive.color.neutral.400}", "$description": "Text of disabled controls. Exempt from contrast rules (WCAG 1.4.3).", "$extensions": {"com.fabric": {"mui": "palette.text.disabled"}}},
-      "inverse": {"$value": "{primitive.color.white}", "$description": "Text placed on color.surface.inverse."}
+      "inverse": {"$value": "{primitive.color.white}", "$description": "Text placed on color.surface.inverse."},
+      "tertiary": {"$value": "{primitive.color.neutral.500}", "$description": "Content Tertiary: decorative or redundant text only. Never for essential, informational or interactive text. Not contrast-checked."}
     },
     "border": {
       "default": {"$value": "{primitive.color.neutral.300}", "$description": "Default outline for inputs and cards.", "$extensions": {"com.fabric": {"mui": "palette.divider"}}},

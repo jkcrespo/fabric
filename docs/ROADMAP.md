@@ -32,6 +32,9 @@ at the AI Design Systems Conference 2026
 - **Small, intent-based component APIs** (`variant="solid"`, `color="danger"`) over
   MUI's full prop surface: fewer choices, fewer wrong guesses by agents. Any MUI
   component still works with the theme.
+- **Spacing, radius and typography rules from the Unify reference guide** — px × 25
+  spacing scale with named relationships, assigned radius per component (brand-
+  controlled), and typography rules as always-on agent rules.
 - **Metadata checked against code.** A contract that can drift is worse than none.
 - **npm scope `@jkcrespo`**, packages named `fabric-*`. MIT license.
 - **MUI as the base** — accessibility and behavior come from MUI; Fabric owns tokens,

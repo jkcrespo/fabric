@@ -73,8 +73,9 @@ npm run check
 ```
 
 The generator builds full color ramps that already pass every contrast rule. Options:
-`--heading` / `--body` (`sans` `serif` `mono`), `--radius-control` / `--radius-container`
-(`none` `sm` `md` `lg` `xl`), `--description`.
+`--heading` / `--body` (`sans` `serif` `mono`), `--radius-button` / `--radius-input` /
+`--radius-card-sm` / `--radius-card-md` / `--radius-card-lg` (`000` `050` `150` `200` `300`
+`full`), `--description`.
 
 ## License
 

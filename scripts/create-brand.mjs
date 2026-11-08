@@ -4,7 +4,8 @@
  *
  *   npm run create-brand -- <brand-id> --primary "#0f62fe" --secondary "#8a3ffc" \
  *     [--heading sans|serif|mono] [--body sans|serif|mono] \
- *     [--radius-control none|sm|md|lg|xl] [--radius-container none|sm|md|lg|xl] \
+ *     [--radius-button 000|050|150|200|300|full] [--radius-input …] \
+ *     [--radius-card-sm …] [--radius-card-md …] [--radius-card-lg …] \
  *     [--description "Text"] [--force]
  *
  * Writes tokens/brands/<brand-id>.json with full ramps that already pass the
@@ -17,15 +18,18 @@ import { TOKENS, SEGMENT } from './lib/tokens.mjs';
 import { generateRamp } from './lib/ramp.mjs';
 
 const FONTS = ['sans', 'serif', 'mono'];
-const RADII = ['none', 'sm', 'md', 'lg', 'xl'];
+const RADII = ['000', '050', '150', '200', '300', 'full'];
+/** Defaults follow the Fabric radius logic: pill buttons, 8px inputs, 6/8/12px cards. */
+const RADIUS_DEFAULTS = { button: 'full', input: '200', 'card-sm': '150', 'card-md': '200', 'card-lg': '300' };
 
-export function buildBrand({ id, primary, secondary, heading = 'sans', body = 'sans', radiusControl = 'md', radiusContainer = 'lg', description }) {
+export function buildBrand({ id, primary, secondary, heading = 'sans', body = 'sans', radius = {}, description }) {
   if (!SEGMENT.test(id)) throw new Error(`brand id "${id}" must be lowercase kebab-case`);
   for (const [name, hex] of [['primary', primary], ['secondary', secondary]]) {
     if (!/^#[0-9a-f]{6}$/i.test(hex ?? '')) throw new Error(`--${name} must be a #rrggbb color`);
   }
   for (const [name, v] of [['heading', heading], ['body', body]]) if (!FONTS.includes(v)) throw new Error(`--${name} must be one of ${FONTS.join(', ')}`);
-  for (const [name, v] of [['radius-control', radiusControl], ['radius-container', radiusContainer]]) if (!RADII.includes(v)) throw new Error(`--${name} must be one of ${RADII.join(', ')}`);
+  const radii = { ...RADIUS_DEFAULTS, ...Object.fromEntries(Object.entries(radius).filter(([, v]) => v !== undefined)) };
+  for (const [name, v] of Object.entries(radii)) if (!RADII.includes(v)) throw new Error(`--radius-${name} must be one of ${RADII.join(', ')}`);
 
   const ramp = (hex) => Object.fromEntries(Object.entries(generateRamp(hex)).map(([step, value]) => [step, { $value: value }]));
   return {
@@ -44,8 +48,7 @@ export function buildBrand({ id, primary, secondary, heading = 'sans', body = 's
       },
       radius: {
         $type: 'dimension',
-        control: { $value: `{primitive.radius.${radiusControl}}` },
-        container: { $value: `{primitive.radius.${radiusContainer}}` },
+        ...Object.fromEntries(Object.entries(radii).map(([k, v]) => [k, { $value: `{primitive.radius.${v}}` }])),
       },
     },
   };
@@ -79,8 +82,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       secondary: opt('secondary'),
       heading: opt('heading'),
       body: opt('body'),
-      radiusControl: opt('radius-control'),
-      radiusContainer: opt('radius-container'),
+      radius: Object.fromEntries(Object.keys(RADIUS_DEFAULTS).map((k) => [k, opt(`radius-${k}`)])),
       description: opt('description'),
     });
     writeFileSync(file, stringify(brand));

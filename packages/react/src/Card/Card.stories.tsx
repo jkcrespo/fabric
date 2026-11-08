@@ -16,7 +16,7 @@ const meta = {
   },
   argTypes: {
     variant: { control: 'inline-radio', options: ['elevated', 'outlined'] },
-    padding: { control: 'inline-radio', options: ['sm', 'md', 'lg'] },
+    size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] },
   },
   decorators: [(Story) => <div style={{ maxWidth: 420 }}><Story /></div>],
 } satisfies Meta<typeof Card>;

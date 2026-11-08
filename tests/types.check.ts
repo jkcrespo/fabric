@@ -6,7 +6,7 @@ const id: FabricBrandId = brands[0];
 const light: FabricTokens = tokens.light;
 const fill: string = light.color.primary.backgroundHover;
 const weight: number = tokens.dark.typography.bodyMd.fontWeight;
-const cssVar: string = vars.space.md;
+const cssVar: string = vars.space.betweenInputs;
 const bp: number = acme.breakpoints.md;
 
 // @ts-expect-error primitives are not part of the public API
