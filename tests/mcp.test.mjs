@@ -25,7 +25,7 @@ test('exposes the expected tools, resources and prompt', async () => {
   const tools = (await client.listTools()).tools.map((t) => t.name).sort();
   assert.deepEqual(tools, ['find_component', 'get_component', 'get_guideline', 'get_rules', 'get_token', 'list_brands', 'list_components', 'list_tokens']);
   const resources = (await client.listResources()).resources.map((r) => r.uri).sort();
-  assert.deepEqual(resources, ['fabric://components.json', 'fabric://rules', 'fabric://tokens.json']);
+  assert.deepEqual(resources, ['fabric://components.json', 'fabric://components.md', 'fabric://rules', 'fabric://tokens.json', 'fabric://tokens.md']);
   assert.ok((await client.listPrompts()).prompts.some((p) => p.name === 'build-with-fabric'));
 });
 

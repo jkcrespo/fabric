@@ -1,8 +1,9 @@
 #!/usr/bin/env node
-/** Bundles every src/<Name>/<name>.meta.json into dist/components.json — the file agents read. */
+/** Bundles every src/<Name>/<name>.meta.json into dist/components.json (JSON) and components.md + docs/<Name>.md (Markdown). */
 import { readdirSync, readFileSync, statSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { componentToMarkdown, componentsToMarkdown } from '../../scripts/lib/markdown.mjs';
 
 const HERE = fileURLToPath(new URL('.', import.meta.url));
 const SRC = join(HERE, 'src');
@@ -19,4 +20,8 @@ writeFileSync(
   join(HERE, 'dist/components.json'),
   JSON.stringify({ $description: 'Machine-readable contract for every Fabric component. Generated from src/*/*.meta.json.', package: pkg.name, version: pkg.version, components }, null, 2) + '\n'
 );
-console.log(`Bundled metadata for ${components.length} components → dist/components.json`);
+// Same facts as components.json, as documents for people and LLM prompts.
+writeFileSync(join(HERE, 'dist/components.md'), componentsToMarkdown(components));
+mkdirSync(join(HERE, 'dist/docs'), { recursive: true });
+for (const c of components) writeFileSync(join(HERE, `dist/docs/${c.name}.md`), componentToMarkdown(c));
+console.log(`Bundled metadata for ${components.length} components → dist/components.json, components.md, docs/*.md`);

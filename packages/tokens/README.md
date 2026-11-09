@@ -37,8 +37,14 @@ vars.color.primary.background;           // 'var(--fabric-color-primary-backgrou
 Keys are the token path in camelCase: `color.primary.background-hover` →
 `color.primary.backgroundHover`.
 
-## For agents
+## For agents (JSON and Markdown)
 
-`@jkcrespo/fabric-tokens/manifest.json` lists every token with its intent
+Every token is published twice, with the same facts:
+
+- `@jkcrespo/fabric-tokens/manifest.json` — JSON, for tools and MCP.
+- `@jkcrespo/fabric-tokens/tokens.md` — Markdown tables grouped by category, for people
+  and LLM prompts.
+
+The manifest lists every token with its intent
 (`description`), MUI mapping, CSS variable, JS path and resolved value for every
 brand × mode.

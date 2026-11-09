@@ -33,8 +33,12 @@ Inside the Fabric repo, `.mcp.json` already points Claude Code at the local buil
 | `get_token` | One token's value per brand and mode |
 | `list_brands` | Available brands and modes |
 
-Also exposed as resources (`fabric://rules`, `fabric://components.json`,
-`fabric://tokens.json`) and a prompt, `build-with-fabric`.
+`get_component` and `list_tokens` answer in `json` (default) or `markdown`. Also exposed
+as resources in both formats (`fabric://components.json` / `.md`,
+`fabric://tokens.json` / `.md`, plus `fabric://rules`) and a prompt, `build-with-fabric`.
+
+All Markdown comes from one renderer (`scripts/lib/markdown.mjs`), so it always states
+the same facts as the JSON.
 
 ## Why rules *and* lookups
 

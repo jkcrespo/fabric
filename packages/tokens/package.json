@@ -10,6 +10,7 @@
   "exports": {
     ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
     "./manifest.json": "./dist/manifest.json",
+    "./tokens.md": "./dist/tokens.md",
     "./*.css": "./dist/*.css",
     "./*": { "types": "./dist/*.d.ts", "default": "./dist/*.js" }
   },

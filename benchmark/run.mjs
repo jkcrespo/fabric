@@ -16,7 +16,7 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { loadData, componentToMarkdown, tokensToMarkdown } from '@jkcrespo/fabric-mcp';
+import { loadData } from '@jkcrespo/fabric-mcp';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const RUN = process.argv.includes('--run');
@@ -29,7 +29,8 @@ const data = loadData();
 const tokenRows = data.tokens.map(({ values, modeDependent, ...rest }) => rest);
 const FORMATS = {
   json: `# Components (JSON)\n${JSON.stringify(data.components)}\n\n# Tokens (JSON)\n${JSON.stringify(tokenRows)}`,
-  markdown: `${data.components.map(componentToMarkdown).join('\n')}\n# Tokens\n\n${tokensToMarkdown(data.tokens)}`,
+  // Same facts as the JSON: component docs + token table without per-brand values.
+  markdown: `${data.markdown.allComponents}\n# Tokens\n\n${[data.markdown.tokenTableHeader, ...data.tokens.map((t) => data.markdown.tokenRows[t.id])].join('\n')}`,
   prose: ['packages/react/README.md', 'packages/theme/README.md', 'packages/tokens/README.md', ...['spacing', 'radius', 'typography', 'naming', 'tokens'].map((t) => `docs/foundations/${t}.md`)]
     .map(read)
     .join('\n\n'),

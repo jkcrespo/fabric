@@ -1,9 +1,7 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import { loadData, type ComponentMeta, type FabricData, type TokenEntry } from './data.js';
-import { componentToMarkdown, tokensToMarkdown } from './markdown.js';
 
-export { componentToMarkdown, tokensToMarkdown } from './markdown.js';
 export { loadData } from './data.js';
 export type { FabricData, ComponentMeta, TokenEntry } from './data.js';
 
@@ -129,7 +127,7 @@ export function createFabricServer(data: FabricData = loadData()): McpServer {
     async ({ name, format }) => {
       const c = findComponent(name);
       if (!c) return fail(`Unknown component "${name}". Available: ${data.components.map((x) => x.name).join(', ')}.`);
-      return format === 'markdown' ? text(componentToMarkdown(c)) : json(c);
+      return format === 'markdown' ? text(data.markdown.components[c.name]) : json(c);
     }
   );
 
@@ -154,7 +152,7 @@ export function createFabricServer(data: FabricData = loadData()): McpServer {
           (!category || t.id.startsWith(`${category}.`)) &&
           q.every((w) => t.id.toLowerCase().includes(w) || t.description.toLowerCase().includes(w))
       );
-      if (format === 'markdown') return text(tokensToMarkdown(matches));
+      if (format === 'markdown') return text([data.markdown.tokenTableHeader, ...matches.map((t) => data.markdown.tokenRows[t.id])].join('\n') + '\n');
       return json(matches.map(({ values, modeDependent, ...rest }) => rest));
     }
   );
@@ -206,6 +204,12 @@ export function createFabricServer(data: FabricData = loadData()): McpServer {
   }));
   server.registerResource('tokens', 'fabric://tokens.json', { title: 'All semantic tokens', mimeType: 'application/json' }, async (uri) => ({
     contents: [{ uri: uri.href, mimeType: 'application/json', text: JSON.stringify(data.tokens) }],
+  }));
+  server.registerResource('components-md', 'fabric://components.md', { title: 'All component contracts (Markdown)', mimeType: 'text/markdown' }, async (uri) => ({
+    contents: [{ uri: uri.href, mimeType: 'text/markdown', text: data.markdown.allComponents }],
+  }));
+  server.registerResource('tokens-md', 'fabric://tokens.md', { title: 'All semantic tokens with values (Markdown)', mimeType: 'text/markdown' }, async (uri) => ({
+    contents: [{ uri: uri.href, mimeType: 'text/markdown', text: data.markdown.tokens }],
   }));
   server.registerPrompt(
     'build-with-fabric',

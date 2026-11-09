@@ -59,3 +59,19 @@ test('manifest describes every token for agents', async () => {
   assert.equal(t.values.fabric.light, '#dc2626');
   assert.ok(m.tokens.every((x) => x.description));
 });
+
+test('markdown and JSON state the same tokens and components', async () => {
+  const m = JSON.parse(readFileSync(join(out, 'manifest.json'), 'utf8'));
+  const md = readFileSync(join(out, 'tokens.md'), 'utf8');
+  for (const t of m.tokens) assert.ok(md.includes(`\`${t.id}\``), `tokens.md lists ${t.id}`);
+  assert.match(md, /\| `color\.primary\.background` \| `--fabric-color-primary-background` \| `palette\.primary\.main` \|.*\| `#c2410c` \|/);
+  const react = 'packages/react/dist';
+  const comps = JSON.parse(readFileSync(join(react, 'components.json'), 'utf8')).components;
+  const all = readFileSync(join(react, 'components.md'), 'utf8');
+  for (const c of comps) {
+    const doc = readFileSync(join(react, 'docs', `${c.name}.md`), 'utf8');
+    assert.ok(all.includes(`## ${c.name}`), `components.md has ${c.name}`);
+    for (const p of c.props) assert.ok(doc.includes(`\`${p.name}\``), `${c.name}.md documents prop ${p.name}`);
+  }
+});
+

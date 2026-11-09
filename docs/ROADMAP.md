@@ -35,6 +35,8 @@ at the AI Design Systems Conference 2026
 - **Spacing, radius and typography rules from the Unify reference guide** — px × 25
   spacing scale with named relationships, assigned radius per component (brand-
   controlled), and typography rules as always-on agent rules.
+- **JSON and Markdown for everything agents read** — one renderer produces both, so they
+  never disagree. JSON for tools and MCP, Markdown for people and prompts.
 - **Metadata checked against code.** A contract that can drift is worse than none.
 - **npm scope `@jkcrespo`**, packages named `fabric-*`. MIT license.
 - **MUI as the base** — accessibility and behavior come from MUI; Fabric owns tokens,

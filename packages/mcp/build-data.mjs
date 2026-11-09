@@ -7,6 +7,7 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { tokensToMarkdown } from '../../scripts/lib/markdown.mjs';
 
 const HERE = fileURLToPath(new URL('.', import.meta.url));
 const ROOT = join(HERE, '../..');
@@ -33,6 +34,16 @@ const data = {
   modes: tokens.modes,
   tokens: tokens.tokens,
   components: components.components,
+  // Markdown, rendered by the shared renderer (scripts/lib/markdown.mjs) so it always
+  // matches the JSON: one document per component, the full references, and one table
+  // row per token so filtered lists render identically.
+  markdown: {
+    components: Object.fromEntries(components.components.map((c) => [c.name, read(`packages/react/dist/docs/${c.name}.md`)])),
+    allComponents: read('packages/react/dist/components.md'),
+    tokens: read('packages/tokens/dist/tokens.md'),
+    tokenTableHeader: tokensToMarkdown([]).trim(),
+    tokenRows: Object.fromEntries(tokens.tokens.map((t) => [t.id, tokensToMarkdown([t]).trim().split('\n')[2]])),
+  },
 };
 mkdirSync(join(HERE, 'dist/data'), { recursive: true });
 writeFileSync(join(HERE, 'dist/data/fabric.json'), JSON.stringify(data));

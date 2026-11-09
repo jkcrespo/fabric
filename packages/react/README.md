@@ -34,8 +34,11 @@ Any other MUI component works too and picks up the Fabric theme automatically.
 Every component has `src/<Name>/<name>.meta.json` following
 [`schemas/component.schema.json`](../../schemas/component.schema.json): intent, props,
 variants, sizes, states, when to use and when not, composition rules, tokens,
-accessibility and examples. The build bundles them into
-`@jkcrespo/fabric-react/components.json`.
+accessibility and examples. The build publishes them in two formats with the same facts:
+
+- `@jkcrespo/fabric-react/components.json` — JSON, for tools and MCP.
+- `@jkcrespo/fabric-react/components.md` (all) and `docs/<Name>.md` (one per
+  component) — Markdown, for people and LLM prompts.
 
 `npm run validate:components` fails if a metadata file drifts from the code: it compares
 props, required flags and allowed values with the TypeScript types, and checks tokens,

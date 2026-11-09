@@ -50,6 +50,14 @@ export interface FabricData {
   modes: string[];
   tokens: TokenEntry[];
   components: ComponentMeta[];
+  /** Markdown versions of the same facts, from the shared renderer. */
+  markdown: {
+    components: Record<string, string>;
+    allComponents: string;
+    tokens: string;
+    tokenTableHeader: string;
+    tokenRows: Record<string, string>;
+  };
 }
 
 /** The data bundled by build-data.mjs. */

@@ -12,7 +12,9 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./components.json": "./dist/components.json"
+    "./components.json": "./dist/components.json",
+    "./components.md": "./dist/components.md",
+    "./docs/*.md": "./dist/docs/*.md"
   },
   "files": [
     "dist"
