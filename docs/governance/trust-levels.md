@@ -23,6 +23,8 @@ Agents earn autonomy like a career: they start as interns. The rule of thumb:
 
 | Action | Level needed | Merge |
 | --- | --- | --- |
+| Apply `no-raw-spacing` auto-fixes (exact scale matches, value-preserving) | L2 | Auto when CI green |
+| Report drift and failing checks (daily health check) | L1 | Issue only — never pushes |
 | Fix a broken token reference | L2 | Auto when CI green |
 | Fix a naming violation (rename + update refs) | L2 | Auto when CI green |
 | Add a missing `$description` | L1 | Human review |

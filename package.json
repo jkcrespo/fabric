@@ -14,8 +14,8 @@
     "build": "npm run build --workspaces",
     "create-brand": "node scripts/create-brand.mjs",
     "typecheck": "tsc -p tests/tsconfig.json && tsc -p packages/react/tsconfig.stories.json",
-    "test": "node --test tests/build.test.mjs tests/ramp.test.mjs tests/mcp.test.mjs",
-    "check": "npm run validate && npm run validate:components && npm run build && npm run typecheck && npm test && npm run test:browser && npm run build-storybook && npm run test:a11y",
+    "test": "node --test tests/build.test.mjs tests/ramp.test.mjs tests/mcp.test.mjs tests/eslint-plugin.test.mjs",
+    "check": "npm run validate && npm run validate:components && npm run build && npm run typecheck && npm run lint && npm run drift:check && npm test && npm run test:browser && npm run build-storybook && npm run test:a11y",
     "test:browser": "node --test tests/browser.test.mjs",
     "validate:components": "node scripts/validate-components.mjs",
     "validate:components:json": "node scripts/validate-components.mjs --json",
@@ -23,7 +23,10 @@
     "build-storybook": "npm run build-storybook -w @jkcrespo/fabric-react",
     "test:a11y": "node --test tests/a11y.test.mjs",
     "benchmark": "node benchmark/run.mjs",
-    "benchmark:run": "node benchmark/run.mjs --run"
+    "benchmark:run": "node benchmark/run.mjs --run",
+    "lint": "eslint",
+    "drift": "fabric-drift packages/react/src packages/react/.storybook tests/browser",
+    "drift:check": "fabric-drift packages/react/src packages/react/.storybook tests/browser --min-score 100"
   },
   "repository": {
     "type": "git",
@@ -33,7 +36,8 @@
     "packages/tokens",
     "packages/theme",
     "packages/react",
-    "packages/mcp"
+    "packages/mcp",
+    "packages/eslint-plugin"
   ],
   "devDependencies": {
     "@anthropic-ai/sdk": "^1.3.0",
@@ -42,9 +46,11 @@
     "ajv": "^8.20.0",
     "axe-core": "^4.14.0",
     "esbuild": "^0.28.2",
+    "eslint": "^10.13.0",
     "playwright": "^1.63.0",
     "storybook": "^10.6.3",
     "typescript": "^5.9.3",
+    "typescript-eslint": "^8.72.0",
     "vite": "^8.3.5"
   }
 }

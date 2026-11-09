@@ -1,0 +1,42 @@
+{
+  "name": "@jkcrespo/eslint-plugin-fabric",
+  "version": "0.1.0",
+  "description": "ESLint rules that keep apps on Fabric's tokens and rules, plus a drift score (fabric-drift).",
+  "license": "MIT",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./drift": "./src/drift.js"
+  },
+  "bin": {
+    "fabric-drift": "./bin/fabric-drift.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "dist"
+  ],
+  "scripts": {
+    "build": "node build-data.mjs"
+  },
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "design-system",
+    "fabric",
+    "mui",
+    "design-tokens"
+  ],
+  "peerDependencies": {
+    "eslint": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jkcrespo/fabric.git",
+    "directory": "packages/eslint-plugin"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

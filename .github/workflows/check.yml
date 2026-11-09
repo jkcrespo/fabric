@@ -19,6 +19,8 @@ jobs:
       - run: npm run validate:components
       - run: npm run build
       - run: npm run typecheck
+      - run: npm run lint
+      - run: npm run drift:check
       - run: npm test
       - run: npm run benchmark   # size only, no API calls
       - run: npx playwright install --with-deps chromium

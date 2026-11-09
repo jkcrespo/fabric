@@ -1,0 +1,81 @@
+name: Daily design system health
+
+# Observe → detect → suggest. Runs every check and the drift score once a day and
+# reports through ONE GitHub issue. Its only write permission is issues: it can never
+# push, open PRs or merge (trust level L1, docs/governance/trust-levels.md).
+
+on:
+  schedule:
+    - cron: '17 11 * * *' # daily, 11:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - id: tokens
+        continue-on-error: true
+        run: npm run validate
+      - id: components
+        continue-on-error: true
+        run: npm run validate:components
+      - id: build
+        continue-on-error: true
+        run: npm run build
+      - id: tests
+        continue-on-error: true
+        run: npm test
+      - id: lint
+        continue-on-error: true
+        run: npm run lint
+      - id: drift
+        continue-on-error: true
+        run: npm run drift -- --out drift-report.md --min-score 100
+      - name: Report through one issue
+        uses: actions/github-script@v7
+        env:
+          OUTCOMES: >-
+            {"Token validation": "${{ steps.tokens.outcome }}",
+             "Component metadata": "${{ steps.components.outcome }}",
+             "Build": "${{ steps.build.outcome }}",
+             "Tests": "${{ steps.tests.outcome }}",
+             "Lint": "${{ steps.lint.outcome }}",
+             "Drift score 100%": "${{ steps.drift.outcome }}"}
+        with:
+          script: |
+            const fs = require('fs');
+            const outcomes = JSON.parse(process.env.OUTCOMES);
+            const healthy = Object.values(outcomes).every((o) => o === 'success');
+            const drift = fs.existsSync('drift-report.md') ? fs.readFileSync('drift-report.md', 'utf8') : '_Drift report not produced (build failed?)._';
+            const run = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const table = Object.entries(outcomes).map(([k, v]) => `| ${k} | ${v === 'success' ? '✅ pass' : '❌ ' + v} |`).join('\n');
+            const body = [
+              healthy ? '**All checks pass.**' : '**Something drifted.** Details below; logs in the [workflow run](' + run + ').',
+              '', '| Check | Result |', '| --- | --- |', table, '', drift, '',
+              '---', '_Opened by the daily health check. It can only report: fixes go through a normal PR with human review._',
+            ].join('\n');
+            const label = 'design-system-health';
+            try { await github.rest.issues.getLabel({ ...context.repo, name: label }); }
+            catch { await github.rest.issues.createLabel({ ...context.repo, name: label, color: 'd73a4a', description: 'Reported by the daily design system health check' }); }
+            const { data: open } = await github.rest.issues.listForRepo({ ...context.repo, labels: label, state: 'open' });
+            const issue = open[0];
+            if (!healthy && !issue) {
+              await github.rest.issues.create({ ...context.repo, title: 'Design system health: checks failing or drift found', labels: [label], body });
+            } else if (!healthy && issue) {
+              await github.rest.issues.update({ ...context.repo, issue_number: issue.number, body });
+              await github.rest.issues.createComment({ ...context.repo, issue_number: issue.number, body: `Still failing on ${new Date().toISOString().slice(0, 10)}. [Run](${run}).` });
+            } else if (healthy && issue) {
+              await github.rest.issues.createComment({ ...context.repo, issue_number: issue.number, body: 'All checks pass again — closing.\n\n' + body });
+              await github.rest.issues.update({ ...context.repo, issue_number: issue.number, state: 'closed', state_reason: 'completed' });
+            }
+            core.summary.addRaw(body).write();

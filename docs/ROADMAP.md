@@ -17,8 +17,8 @@ at the AI Design Systems Conference 2026
 | 3 | **MUI theme** — `@jkcrespo/fabric-theme`: `FabricProvider`, `createFabricTheme(brand)`, CSS-variables theme (one theme for all brands, mode switch without re-render), `FabricBrandScope`, typed `theme.fabric`. Tested in Chromium | — | ✅ Done |
 | 4 | **First components** — `@jkcrespo/fabric-react`: Button, TextField, Card, Alert, Dialog on MUI. Each ships a `*.meta.json` checked against the schema *and* the TypeScript props (`npm run validate:components`). Storybook with brand + mode switcher; axe WCAG 2.1 AA on every story × brand × mode | Make components machine-readable · Add intent | ✅ Done |
 | 5 | **Agent access** — `@jkcrespo/fabric-mcp`: MCP server bundling rules, tokens, component contracts and guidelines (8 tools, 3 resources, 1 prompt). `.mcp.json` for this repo. JSON vs Markdown vs prose benchmark on 22 real questions (`npm run benchmark`) | Progressive disclosure · Benchmark before committing to a format | ✅ Done (accuracy run pending) |
-| 6 | **Self-healing loop** — lint for hard-coded values / primitive usage, drift score, scheduled agent QA that can only open issues | Observe → detect → suggest → fix → learn | ⏭ Next |
-| 7 | **Publish** — npm packages, docs site, contribution guide, release automation | — | |
+| 6 | **Self-healing loop** — `@jkcrespo/eslint-plugin-fabric` (7 rules, published for apps on Fabric; Fabric lints itself with it), `fabric-drift` score, safe auto-fixes for exact spacing matches, daily health check that can only open/update one issue | Observe → detect → suggest → fix → learn | ✅ Done |
+| 7 | **Publish** — npm packages, docs site, contribution guide, release automation | — | ⏭ Next |
 
 ## Key decisions
 

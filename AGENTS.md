@@ -99,6 +99,8 @@ If the `fabric` MCP server is connected (`.mcp.json` in this repo, or
 npm run validate         # tokens: naming, layers, refs, brand contract, modes, contrast
 npm run validate:json    # same, machine-readable
 npm run validate:components   # component metadata matches schema and TypeScript props
+npm run lint             # Fabric lint rules (tokens, colors, spacing, radius, type, labels)
+npm run drift            # drift score: share of style values that follow Fabric
 npm run check            # everything CI runs, incl. browser and axe accessibility tests
 ```
 

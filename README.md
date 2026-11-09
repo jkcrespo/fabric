@@ -9,7 +9,7 @@ An open-source, **white-label**, **agent-ready** design system built on [MUI](ht
 - **MUI-based:** behavior and accessibility come from MUI; Fabric supplies tokens,
   theming and the agent layer.
 
-> Status: **Step 5 — Agent access** done. See [`docs/ROADMAP.md`](docs/ROADMAP.md).
+> Status: **Step 6 — Self-healing loop** done. See [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
 ## Repository layout
 
@@ -26,6 +26,7 @@ packages/
   theme/                   @jkcrespo/fabric-theme — MUI theme + FabricProvider
   react/                   @jkcrespo/fabric-react — components, metadata, Storybook
   mcp/                     @jkcrespo/fabric-mcp — MCP server for AI agents
+  eslint-plugin/           @jkcrespo/eslint-plugin-fabric — lint rules + fabric-drift
 benchmark/                 JSON vs Markdown vs prose benchmark
 schemas/
   component.schema.json    Machine-readable contract for component metadata
